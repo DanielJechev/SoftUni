@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double priceExcursion = Double.parseDouble(scanner.nextLine());
+        int numberPuzzle = Integer.parseInt(scanner.nextLine());
+        int numberDolls= Integer.parseInt(scanner.nextLine());
+        int numberBears = Integer.parseInt(scanner.nextLine());
+        int numberMinions = Integer.parseInt(scanner.nextLine());
+        int numberTrucks=Integer.parseInt(scanner.nextLine());
+        double sum = numberPuzzle*2.60 +numberDolls*3.0 +numberBears*4.10 + numberMinions*8.20 + numberTrucks*2 ;
+        int allToys = numberPuzzle + numberDolls +numberBears +numberMinions +numberTrucks ;
+        if (allToys >= 50) {
+            sum= sum*0.75  ;
+        }
+        sum=sum*0.90 ;
+        double diff = Math.abs ( sum - priceExcursion) ;
+        if (sum >= priceExcursion) {
+            System.out.printf("Yes! %.2f lv left.",sum-priceExcursion);
+        } else {
+            System.out.printf("Not enough money! %.2f lv needed.", priceExcursion-sum);
+        }
+
+    }
+}

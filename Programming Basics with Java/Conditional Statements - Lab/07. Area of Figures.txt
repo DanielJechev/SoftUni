@@ -1,0 +1,29 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+	Scanner scanner= new Scanner(System.in);
+	String input = scanner.nextLine();
+	 double result = 0 ;
+	 if ("square".equals(input)) {
+	     double side=Double.parseDouble(scanner.nextLine());
+	     result=side*side ;
+     } else if ("rectangle".equals(input)) {
+	     double a =Double.parseDouble(scanner.nextLine());
+	     double b = Double.parseDouble(scanner.nextLine());
+	     result= a*b ;
+     } else if ("circle".equals(input)) {
+	     double r = Double.parseDouble(scanner.nextLine());
+	     result = Math.PI*r*r ;
+     } else if ("triangle".equals(input)){
+	     double a= Double.parseDouble(scanner.nextLine());
+	     double h = Double.parseDouble(scanner.nextLine());
+	     result= (a*h)/2 ;
+
+     }
+        System.out.printf("%.3f",result);
+    }
+}
