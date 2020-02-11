@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class Main {
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+      int hours = Integer.parseInt(scanner.nextLine());
+      int mins = Integer.parseInt(scanner.nextLine());
+      int totalMins= hours*60 + mins+15;
+      int outHours= totalMins/60;
+      int outMins = totalMins % 60 ;
+      if (outHours ==24){
+          outHours -=24;
+      }
+      if (outMins <10) {
+          System.out.printf("%d:0%d",outHours,outMins);
+      } else  {
+          System.out.printf("%d:%d",outHours,outMins);
+      }
+    }
+}

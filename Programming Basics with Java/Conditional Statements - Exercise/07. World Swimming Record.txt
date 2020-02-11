@@ -1,0 +1,25 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double recordsInSeconds = Double.parseDouble(scanner.nextLine());
+        double distanceInMeturs=Double.parseDouble(scanner.nextLine());
+        double timeInSeconds= Double.parseDouble(scanner.nextLine());
+        double mustSwim = distanceInMeturs*timeInSeconds;
+        double more = distanceInMeturs/15 ;
+        double diff = Math.floor(more);
+        double slow=  diff*12.5;
+        double allTime = mustSwim + slow;
+
+        if (recordsInSeconds > allTime ) {
+           
+            System.out.printf("Yes, he succeeded! The new world record is %.2f seconds.", allTime);
+        } else {
+            System.out.printf(" No, he failed! He was %.2f seconds slower.",Math.abs(allTime - recordsInSeconds));
+        }
+    }
+        }

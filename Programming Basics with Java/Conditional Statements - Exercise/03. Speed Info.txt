@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class Main {
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       double skorost = Double.parseDouble(scanner.nextLine());
+       if (skorost <=10) {
+           System.out.printf("slow");
+       } else if (skorost  <= 50) {
+           System.out.printf("average");
+       } else if (skorost  <= 150) {
+           System.out.printf("fast");
+       } else if (skorost <=1000) {
+           System.out.printf("ultra fast");
+       }else  {
+           System.out.printf("extremely fast");
+       }
+    }
+}

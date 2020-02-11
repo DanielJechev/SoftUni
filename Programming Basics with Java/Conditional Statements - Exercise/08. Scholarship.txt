@@ -1,0 +1,30 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double income = Double.parseDouble(scanner.nextLine());
+        double middleGrades = Double.parseDouble(scanner.nextLine());
+        double minSalary = Double.parseDouble(scanner.nextLine());
+        double scholarship1 = 0;
+        double scholarship2 = 0;
+
+        if (income < minSalary && middleGrades > 4.50) {
+            scholarship1 = 0.35*minSalary;
+         }
+        if (middleGrades >= 5.50) {
+            scholarship2 = middleGrades*25;
+        }
+        if (scholarship1 > scholarship2) {
+            System.out.printf(" You get a Social scholarship %.0f BGN", Math.floor(scholarship1));
+        }   else  if (scholarship1 < scholarship2){
+            System.out.printf("You get a scholarship for excellent results %.0f BGN",Math.floor(scholarship2));
+        } else {
+            System.out.printf("You cannot get a scholarship!");
+        }
+    }
+        }
+
