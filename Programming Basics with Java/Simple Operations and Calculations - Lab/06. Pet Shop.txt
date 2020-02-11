@@ -1,0 +1,16 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+      int kucheta=Integer.parseInt(scanner.nextLine());
+      int drugi=Integer.parseInt(scanner.nextLine());
+      double sumKuche= kucheta*2.50;
+      double sumDrugi=drugi*4.00;
+      double sum = sumKuche+sumDrugi;
+        System.out.printf("%.2f lv.",sum);
+    }
+}

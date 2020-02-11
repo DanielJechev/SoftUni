@@ -1,0 +1,18 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner= new Scanner(System.in);
+        int lenght = Integer.parseInt(scanner.nextLine()) ;
+        int widht = Integer.parseInt(scanner.nextLine()) ;
+        int height = Integer.parseInt(scanner.nextLine());
+        double percent  = Double.parseDouble(scanner.nextLine());
+        int volume = lenght*widht*height ;
+        double volumeLiters= volume*0.001 ;
+        double needLiters = volumeLiters*(1- percent *0.01) ;
+        System.out.printf("%.3f",needLiters);
+
+    }
+    }
