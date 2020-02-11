@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       int tables = Integer.parseInt (scanner.nextLine()) ;
+       double lenght = Double.parseDouble (scanner.nextLine());
+       double width=Double.parseDouble(scanner.nextLine()) ;
+        double areaPokrivki = tables *(lenght+2*0.30) *(width+2*0.30);
+        double areaKareta = tables *(lenght/2)*(lenght/2) ;
+        double priceUsd = areaPokrivki *7 +areaKareta*9 ;
+        double priceLv = priceUsd*1.85;
+        System.out.printf("%.2f USD%n",priceUsd);
+        System.out.printf("%.2f BGN",priceLv);
+
+    }
+}

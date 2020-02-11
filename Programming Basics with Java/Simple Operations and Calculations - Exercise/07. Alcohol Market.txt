@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double priceWhiskey = Double.parseDouble(scanner.nextLine());
+        double beerLiters = Double.parseDouble(scanner.nextLine());
+        double wineLiters  =Double.parseDouble( scanner.nextLine()) ;
+        double rakiqLiters = Double.parseDouble(scanner.nextLine());
+        double whiskeyLiters = Double.parseDouble(scanner.nextLine()) ;
+        double priceRakiq =  0.5 *priceWhiskey ;
+        double priceWine = priceRakiq -(0.4*priceRakiq) ;
+        double pricebeer = priceRakiq- (0.8*priceRakiq) ;
+        double sumRakiq = rakiqLiters *priceRakiq ;
+        double sumWine = wineLiters*priceWine ;
+        double sumBeer= pricebeer*beerLiters ;
+        double sumWhiskey = whiskeyLiters*priceWhiskey;
+        double sumAll = sumRakiq +sumWine+sumBeer+sumWhiskey ;
+        System.out.printf("%.2f",sumAll);
+        }
+    }

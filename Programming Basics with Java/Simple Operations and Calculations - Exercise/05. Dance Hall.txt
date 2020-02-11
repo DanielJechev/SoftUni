@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double l = Double.parseDouble(scanner.nextLine());
+        double w = Double.parseDouble(scanner.nextLine()) ;
+        double a = Double.parseDouble(scanner.nextLine()) ;
+        double areaHall = (l*100)*(w*100) ;
+        double areaWardrobe = (a*100)*(a*100) ;
+        double areaBench =areaHall/10 ;
+        double freeSpace = areaHall-areaWardrobe-areaBench ;
+        double dancers = freeSpace/(40+7000) ;
+        System.out.printf("%.0f",Math.floor(dancers));
+
+    }
+}
