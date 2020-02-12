@@ -1,0 +1,28 @@
+package com.company;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String vowels = scanner.nextLine().toLowerCase();
+        glasni(vowels);
+    }
+
+    private static void glasni(String vowels) {
+        int count = 0;
+        for (int i = 0; i < vowels.length(); i++) {
+            char name= vowels.charAt(i);
+
+            if ('a'==name || 'e'==name || 'i'==name || 'o'==name || 'u'==name) {
+                count++;
+
+            }
+
+        }
+        System.out.println(count);
+    }
+}
+

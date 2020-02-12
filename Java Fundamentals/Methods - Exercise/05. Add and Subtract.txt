@@ -1,0 +1,22 @@
+package com.company;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        substract(scanner);
+    }
+
+    private static void substract(Scanner scanner) {
+        int a =Integer.parseInt(scanner.nextLine());
+        int b=Integer.parseInt(scanner.nextLine());
+        int c =Integer.parseInt(scanner.nextLine());
+        int sum = a+b;
+        int result= sum-c;
+        System.out.println(result);
+    }
+}
+

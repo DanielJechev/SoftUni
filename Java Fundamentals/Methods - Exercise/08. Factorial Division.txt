@@ -1,0 +1,29 @@
+package com.company;
+
+import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       long factorial=1;
+
+       int num=Integer.parseInt(scanner.nextLine());
+        int second=Integer.parseInt(scanner.nextLine());
+        for (int i = 2; i <=num ; i++) {
+          factorial=factorial*i;
+        }
+        long fact=1;
+        for (int i = 2; i <=second ; i++) {
+            fact=fact*i;
+        }
+        double diff= factorial/(fact*1.00);
+        System.out.printf("%.2f",diff);
+
+        }
+
+    }
+
+

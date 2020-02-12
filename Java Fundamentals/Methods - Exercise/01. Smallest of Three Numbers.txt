@@ -1,0 +1,28 @@
+package com.company;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       int first=Integer.parseInt(scanner.nextLine());
+        int second=Integer.parseInt(scanner.nextLine());
+        deistvie(scanner, first, second);
+    }
+
+    private static void deistvie(Scanner scanner, int first, int second) {
+        int third=Integer.parseInt(scanner.nextLine());
+        if (first>=second&& first>=third && second>=third){
+            System.out.println(third);
+        }else if (first>=second&& first>=third && second<=third){
+            System.out.println(second);
+        }else  if (first<=second&& first<=third && second>=third){
+            System.out.println(first);
+        }else if ( first<=second && first<=third && second<=third){
+            System.out.println(first);
+        }
+    }
+}
+

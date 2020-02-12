@@ -1,0 +1,36 @@
+package MethodsExercise0706;
+ 
+import java.util.Scanner;
+ 
+public class Problem9Palidrome {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String command = scanner.nextLine();
+ 
+        while (!command.equals("END")) {
+            palidromeChecker(command);
+            command = scanner.nextLine();
+        }
+ 
+    }
+ 
+ 
+    public static void palidromeChecker(String input) {
+      int inputInt = Integer.parseInt(input);
+ 
+        String reverse = "";
+        int normal = inputInt;
+ 
+       while (normal>0) {
+           reverse+= Integer.toString(normal%10);
+           normal/=10;
+       }
+ 
+        if (inputInt == Integer.parseInt(reverse)) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+ 
+    }
+}
