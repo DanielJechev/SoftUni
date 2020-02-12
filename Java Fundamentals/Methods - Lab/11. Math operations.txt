@@ -1,0 +1,26 @@
+package com.company;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+     int a=Integer.parseInt(scanner.nextLine());
+     String command=scanner.nextLine();
+     int b=Integer.parseInt(scanner.nextLine());
+     if ("/".equals(command)){
+         System.out.println(a/b);
+     }else  if ("*".equals(command)){
+         System.out.println(a*b);
+     }else if ("+".equals(command)){
+         System.out.println(a+b);
+     }else if ("-".equals(command)){
+         System.out.println(a-b);
+     }
+
+
+    }
+}
+

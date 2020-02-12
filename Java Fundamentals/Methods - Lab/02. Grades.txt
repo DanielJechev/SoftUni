@@ -1,0 +1,25 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        printNumbers(Double.parseDouble(scanner.nextLine()));
+    }
+    public static void printNumbers (double first){
+        if (first>=2.00 && first<=2.99){
+            System.out.println("Fail");
+        }else  if (first>=3.00 && first<=3.49){
+            System.out.println("Poor");
+        }else if (first>=3.50 && first<=4.49){
+            System.out.println("Good");
+        }else if (first>=4.50 && first<=5.49){
+            System.out.println("Very good");
+        }else if ( first>=5.50 && first<=6.00) {
+            System.out.println("Excellent");
+        }
+    }
+}

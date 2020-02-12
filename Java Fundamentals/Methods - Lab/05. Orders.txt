@@ -1,0 +1,27 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+          String command=scanner.nextLine();
+          double kolichestvo=Double.parseDouble(scanner.nextLine());
+        printCommand(command,kolichestvo);
+
+
+    }
+
+    private static void printCommand(String command, double kolichestvo) {
+        if ("coffee".equals(command)){
+            System.out.printf("%.2f",kolichestvo*1.50);
+        } else if ( "water".equals(command)){
+            System.out.printf("%.2f",kolichestvo*1.00);
+        }else if ("coke".equals(command)){
+            System.out.printf("%.2f",kolichestvo*1.40);
+        }else if ("snacks".equals(command)){
+            System.out.printf("%.2f",kolichestvo*2.00);
+        }
+    }
+}

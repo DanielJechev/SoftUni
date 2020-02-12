@@ -1,0 +1,28 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+          String command=scanner.nextLine();
+          int first=Integer.parseInt(scanner.nextLine());
+        int second=Integer.parseInt(scanner.nextLine());
+        printCommand(command, first, second);
+
+
+    }
+
+    private static void printCommand(String command, int first, int second) {
+        if ("add".equals(command)){
+            System.out.printf("%d",first+second);
+        } else if ( "multiply".equals(command)){
+            System.out.printf("%d",first*second);
+        }else if ("subtract".equals(command)){
+            System.out.printf("%d",first-second);
+        }else if ("divide".equals(command)){
+            System.out.printf("%d",first/second);
+        }
+    }
+}

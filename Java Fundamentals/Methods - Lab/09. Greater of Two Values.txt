@@ -1,0 +1,53 @@
+package com.company;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String name=scanner.nextLine();
+        novo(scanner, name);
+        oshte(scanner, name);
+        last(scanner, name);
+
+    }
+
+    private static void last(Scanner scanner, String name) {
+        if ("string".equals(name)){
+            String str1=scanner.nextLine();
+            String str2=scanner.nextLine();
+            if (str1.compareTo(str2)>=0){
+                System.out.println(str1);
+            }else {
+                System.out.println(str2);
+            }
+        }
+    }
+
+    private static void oshte(Scanner scanner, String name) {
+        if ("char".equals(name)){
+            char ch=scanner.nextLine().charAt(0);
+            char cha=scanner.nextLine().charAt(0);
+            if (ch>=cha){
+                System.out.println(ch);
+            }else {
+                System.out.println(cha);
+            }
+        }
+    }
+
+    private static void novo(Scanner scanner, String name) {
+        if ("int".equals(name)){
+            int n =Integer.parseInt(scanner.nextLine());
+            int num=Integer.parseInt(scanner.nextLine());
+            if (n>=num){
+                System.out.println(n);
+            }else {
+                System.out.println(num);
+            }
+        }
+    }
+
+}

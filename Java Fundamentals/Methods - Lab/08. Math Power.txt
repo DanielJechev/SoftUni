@@ -1,0 +1,21 @@
+package com.company;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+      double a =Double.parseDouble(scanner.nextLine());
+        int b=Integer.parseInt(scanner.nextLine());
+        DecimalFormat format= new DecimalFormat("#.#########");
+        stepen(a, b, format);
+    }
+
+    private static void stepen(double a, int b, DecimalFormat format) {
+        double result = Math.pow( a,b);
+        System.out.println(format.format(result));
+    }
+
+}
