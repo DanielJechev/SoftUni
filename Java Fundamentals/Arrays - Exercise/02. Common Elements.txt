@@ -1,0 +1,23 @@
+package com.company;
+
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+      String[] first=scanner.nextLine().split(" ");
+      String[] second=scanner.nextLine().split(" ");
+        for (int i = 0; i <second.length ; i++) {
+            String compare= second[i];
+            for (int j = 0; j <first.length ; j++) {
+                String diff=first[j];
+                if (compare.equals(diff)){
+                    System.out.print (compare + " ");
+                }
+            }
+        }
+    }
+}
