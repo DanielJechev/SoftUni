@@ -1,0 +1,42 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int chasNaIzpita =  Integer.parseInt(scanner.nextLine());
+        int minutaNaIzpita = Integer.parseInt(scanner.nextLine());
+        int  chasNaPristigane =Integer.parseInt(scanner.nextLine());
+         int minutaNaPristigane=Integer.parseInt(scanner.nextLine());
+         int izpitaVminuti= chasNaIzpita*60 + minutaNaIzpita;
+         int pristiganeVminuti = chasNaPristigane*60 + minutaNaPristigane;
+         int diff = izpitaVminuti-pristiganeVminuti;
+         if ( diff <0){
+             System.out.printf("Late%n");
+             if (diff > -60) {
+                 System.out.printf("%d minutes after the start",Math.abs( diff));
+             } else {
+                 int hours = Math.abs (diff) / 60;
+                 int mins = Math.abs(diff) % 60;
+                 System.out.printf("%d:%02d hours after the start", hours, mins);
+             }
+         } else  if (diff >=0 && diff <=30){
+            System.out.printf("On time%n");
+            if(diff > 0){
+                System.out.printf("%d minutes before the start", diff);
+            }
+        } else {
+             System.out.printf("Early%n");
+             if (diff < 60) {
+                 System.out.printf("%d minutes before the start", diff);
+             } else {
+                 int hours = diff / 60;
+                 int mins = diff % 60;
+                 System.out.printf("%d:%02d hours before the start", hours, mins);
+             }
+         }
+
+    }
+}
