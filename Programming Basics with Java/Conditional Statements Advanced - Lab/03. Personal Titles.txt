@@ -1,0 +1,25 @@
+package com.company;
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double year = Double.parseDouble(scanner.nextLine());
+        String gender = scanner.nextLine();
+        if ("m".equals(gender)) {
+            if (year >= 16) {
+                System.out.printf("Mr.");
+            } else {
+                System.out.printf("Master");
+            }
+
+        } else if ("f".equals(gender)) {
+            if (year >= 16) {
+                System.out.printf("Ms.");
+            } else {
+                System.out.printf("Miss");
+            }
+        }
+    }
+}
+

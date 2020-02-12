@@ -1,0 +1,66 @@
+package com.company;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String product = scanner.nextLine();
+        String city = scanner.nextLine();
+        double kolichestvo = Double.parseDouble(scanner.nextLine());
+        double price = 0 ;
+        if ("Sofia".equals(city)) {
+         if ("coffee".equals(product)) {
+             price = kolichestvo * 0.50 ;
+             System.out.println(price);
+         } else if ("water".equals(product)){
+             price = kolichestvo*0.80;
+             System.out.println(price);
+         } else if ("beer".equals(product)){
+             price=kolichestvo*1.20;
+             System.out.println(price);
+         } else if ("sweets".equals(product)){
+             price=kolichestvo*1.45;
+             System.out.println(price);
+         }else if ("peanuts".equals(product)){
+             price= kolichestvo*1.60;
+             System.out.println(price);
+         }
+        } else if ("Plovdiv".equals(city)){
+            if ("coffee".equals(product)) {
+                price = kolichestvo * 0.40;
+                System.out.println(price);
+            } else if ("water".equals(product)){
+                price = kolichestvo*0.70;
+                System.out.println(price);
+            } else if ("beer".equals(product)){
+                price=kolichestvo*1.15;
+                System.out.println(price);
+            } else if ("sweets".equals(product)){
+                price=kolichestvo*1.30;
+                System.out.println(price);
+            }else if ("peanuts".equals(product)){
+                price= kolichestvo*1.50;
+                System.out.println(price);
+            }
+        } else if ("Varna".equals(city)){
+            if ("coffee".equals(product)) {
+                price = kolichestvo * 0.45 ;
+                System.out.println(price);
+            } else if ("water".equals(product)){
+                price = kolichestvo*0.70;
+                System.out.println(price);
+            } else if ("beer".equals(product)){
+                price=kolichestvo*1.10;
+                System.out.println(price);
+            } else if ("sweets".equals(product)){
+                price=kolichestvo*1.35;
+                System.out.println(price);
+            }else if ("peanuts".equals(product)){
+                price= kolichestvo*1.55;
+                System.out.println(price);
+            }
+        }
+
+    }
+}
+
+
