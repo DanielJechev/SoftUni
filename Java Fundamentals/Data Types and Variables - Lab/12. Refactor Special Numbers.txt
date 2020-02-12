@@ -1,0 +1,31 @@
+package com.company;
+
+import java.math.BigDecimal;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       int n=Integer.parseInt(scanner.nextLine());
+        for (int num = 1; num <=n ; num++) {
+            int lastDigit = num % 10;
+
+            int firstAndSecond = num / 10;
+
+            int sumOfDigit = lastDigit+firstAndSecond;
+            if (sumOfDigit==5 || sumOfDigit==7 || sumOfDigit==11){
+                System.out.printf("%d -> True%n",num);
+            }else {
+                System.out.printf("%d -> False%n",num);
+            }
+
+
+        }
+
+
+
+
+
+    }
+}

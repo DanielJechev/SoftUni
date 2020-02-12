@@ -1,0 +1,16 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+      int meter=Integer.parseInt(scanner.nextLine());
+      double kilometer= (meter/1000.00);
+        System.out.printf("%.2f",kilometer);
+
+
+
+    }
+}

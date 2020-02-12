@@ -1,0 +1,28 @@
+package com.company;
+
+import java.math.BigDecimal;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double l=Double.parseDouble(scanner.nextLine());
+        double w =Double.parseDouble(scanner.nextLine());
+        double h=Double.parseDouble(scanner.nextLine());
+        System.out.print("Length: ");
+
+        System.out.print("Width: ");
+
+        System.out.print("Height: ");
+
+        double v  =( l*w*h)/3  ;
+        System.out.printf("Pyramid Volume: %.2f", v);
+
+
+
+
+
+
+    }
+}
