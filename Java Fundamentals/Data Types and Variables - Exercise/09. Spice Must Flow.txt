@@ -1,0 +1,33 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+      int  startingYeld =Integer.parseInt(scanner.nextLine());
+      int produced =0;
+      int days=0;
+
+
+        if (startingYeld < 100)
+        {
+            System.out.println(days);
+            System.out.println(produced);
+        }
+        else
+        {
+            while (startingYeld >= 100) {
+                produced += startingYeld - 26;
+                startingYeld -= 10;
+                days++;
+            }
+
+            produced -= 26;
+
+            System.out.println(days);
+            System.out.println(produced);
+        }
+    }
+}
