@@ -1,0 +1,29 @@
+package com.company;
+
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+      int[] first=Arrays.stream(scanner.nextLine().split(" ")).mapToInt(e->Integer.parseInt(e)).toArray();
+      int [] second=Arrays.stream(scanner.nextLine().split(" ")).mapToInt(e->Integer.parseInt(e)).toArray();
+      int sum=0;
+      int result=0;
+        for (int i = 0; i <first.length ; i++) {
+            if (first[i]!=second[i]){
+                System.out.printf("Arrays are not identical. Found difference at %d index.",i);
+                return;
+            }
+            sum=sum+first[i];
+        }
+        for (int i = 0; i <second.length ; i++) {
+            result=result+second[i];
+        }
+        if (sum==result){
+            System.out.printf("Arrays are identical. Sum: %d",sum);
+        }
+    }
+}

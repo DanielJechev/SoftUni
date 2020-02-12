@@ -1,0 +1,24 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       String input =scanner.nextLine();
+       String[] numbersAsStrings=input.split(" ");
+       int [] numbers = new  int[numbersAsStrings.length];
+        for (int i = 0; i < numbersAsStrings.length; i++) {
+            int number = Integer.parseInt(numbersAsStrings[i]);
+            numbers[i]=number;
+        }
+        int sum = 0;
+        for (int i = 0; i <numbersAsStrings.length ; i++) {
+            if(numbers[i]%2==0) {
+                sum = sum + numbers[i];
+            }
+        }
+        System.out.println(sum);
+    }
+}
