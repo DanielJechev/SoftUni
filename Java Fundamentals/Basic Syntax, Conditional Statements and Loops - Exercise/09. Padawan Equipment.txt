@@ -1,0 +1,23 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       double money =Double.parseDouble(scanner.nextLine());
+       int count =Integer.parseInt(scanner.nextLine());
+       double lightSabrePrice=Double.parseDouble(scanner.nextLine());
+       double robePrice=Double.parseDouble(scanner.nextLine());
+       double beltPrice=Double.parseDouble(scanner.nextLine());
+       double neshto = Math.ceil(count*1.1)*lightSabrePrice;
+        double sum = neshto+robePrice*(count)+beltPrice*(count-count/6);
+        double deff = Math.abs(sum-money);
+        if ( sum<=money){
+            System.out.printf("The money is enough - it would cost %.2flv.",sum);
+        }else {
+            System.out.printf("Ivan Cho will need %.2flv more.",deff);
+        }
+
+    }
+}

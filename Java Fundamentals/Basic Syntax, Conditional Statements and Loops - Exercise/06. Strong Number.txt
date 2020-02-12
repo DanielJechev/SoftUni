@@ -1,0 +1,24 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String numberInput=scanner.nextLine();
+        int sum=0;
+        for (int i = 0; i <numberInput.length() ; i++) {
+            int number=Integer.parseInt(String.valueOf(numberInput.charAt(i)));
+            int facturial=1;
+            for (int j = 1; j <=number; j++) {
+               facturial=facturial*j;
+            }
+            sum=facturial+sum;
+        }
+        if (numberInput.equals(String.valueOf(sum))) {
+            System.out.println("yes");
+        }else  {
+            System.out.println("no");
+        }
+    }
+}

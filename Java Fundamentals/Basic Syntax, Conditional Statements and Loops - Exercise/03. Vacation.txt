@@ -1,0 +1,91 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int group =Integer.parseInt(scanner.nextLine());
+
+       String type = scanner.nextLine();
+        String day =scanner.nextLine();
+
+        double sum =0;
+       switch (day){
+           case "Friday":
+               if ("Students".equals(type)){
+                   if (group>=30){
+                       sum=group*8.45*0.85;
+
+                   }else {
+                       sum=group*8.45;
+                   }
+               } else if ("Business".equals(type)){
+                   if (group>=100){
+                       sum=(group*10.90)-109;
+                   }else {
+                       sum=group*10.90;
+                   }
+               }else if ("Regular".equals(type)){
+                   if(group>=10&&group<=20){
+                       sum=group*15*0.95;
+                   }else {
+                       sum=group*15;
+                   }
+               }
+                 break;
+           case "Saturday":
+               if ("Students".equals(type)){
+                   if (group>=30){
+                       sum=group*9.80*0.85;
+                   }else {
+                       sum=group*9.80;
+                   }
+               } else if ("Business".equals(type)){
+                   if (group>=100){
+                       sum=(group*15.60)-156;
+                   }else {
+                       sum=group*15.60;
+                   }
+               }else if ("Regular".equals(type)){
+                   if(group>=10&&group<=20){
+                       sum=group*20*0.95;
+                   }else {
+                       sum=group*20;
+                   }
+               }
+               break;
+
+           case "Sunday":
+               if ("Students".equals(type)){
+                   if (group>=30){
+                       sum=group*10.46*0.85;
+                   }else {
+                       sum=group*10.46;
+                   }
+               } else if ("Business".equals(type)){
+                   if (group>=100){
+                       sum=(group*16)-160;
+                   }else {
+                       sum=group*16;
+                   }
+               }else if ("Regular".equals(type)){
+                   if(group>=10&&group<=20){
+                       sum=group*22.50*0.95;
+                   }else {
+                       sum=group*22.50;
+                   }
+               }
+               break;
+
+       }
+        System.out.printf("Total price: %.2f",sum);
+
+
+
+
+
+
+    }
+    }
+
