@@ -1,0 +1,52 @@
+package ClassesAndObjects;
+ 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+ 
+public class OpinionPoll {
+    static class Person {
+        private String name;
+        private int age;
+ 
+        public String getName (){
+            return this.name;
+        }
+        public void setName(String name){
+            this.name = name;
+        }
+        public int getAge (){
+            return this.age;
+        }
+        public void setAge(int age){
+            this.age = age;
+        }
+    }
+ 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+ 
+        int n = Integer.parseInt(scanner.nextLine());
+ 
+        List<Person> personList = new ArrayList<>();
+ 
+        for (int i = 0; i < n; i++) {
+            String[] input = scanner.nextLine().split("\\s+");
+            Person person = new Person();
+            String name = input[0];
+            int age = Integer.parseInt(input[1]);
+ 
+            person.setName(name);
+            person.setAge(age);
+ 
+            personList.add(person);
+        }
+        personList.sort((f, s) -> f.getName().compareTo(s.getName()));
+        for (Person person: personList) {
+            if (person.getAge() > 30) {
+                System.out.printf("%s - %d%n", person.getName(), person.getAge());
+            }
+        }
+    }
+}

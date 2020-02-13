@@ -1,0 +1,74 @@
+package com.company;
+ 
+import java.util.*;
+import java.util.Collection;
+import java.util.stream.Collectors;
+ 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        List<Articles> articles = new ArrayList<>();
+        int n = Integer.parseInt(scan.nextLine());
+        for (int i = 0; i < n; i++) {
+            String[] data = scan.nextLine().split(", ");
+            Articles myArticle = new Articles();
+            myArticle.setTitle(data[0]);
+            myArticle.setContent(data[1]);
+            myArticle.setAutor(data[2]);
+            articles.add(myArticle);
+        }
+        String command = scan.nextLine();
+        List<Articles> sortedArticles = new ArrayList<>();
+        switch (command) {
+            case "title":
+                sortedArticles = articles.stream().sorted(Comparator.comparing(Articles::getTitle)).collect(Collectors.toList());
+                break;
+            case "content":
+                sortedArticles = articles.stream().sorted((Comparator.comparing(Articles::getContent))).collect(Collectors.toList());
+                break;
+            case "author":
+                sortedArticles = articles.stream().sorted(Comparator.comparing(Articles::getAutor)).collect(Collectors.toList());
+                break;
+            default:
+                break;
+        }
+ 
+        for (Articles a : sortedArticles) {
+            System.out.print(a.getTitle() + " - ");
+            System.out.print(a.getContent() + ": ");
+            System.out.print(a.getAutor());
+            System.out.println();
+        }
+    }
+ 
+    private static class Articles {
+        private String Title = "";
+        private String Content = "";
+        private String Autor = "";
+ 
+        public String getTitle() {
+            return Title;
+        }
+ 
+        public void setTitle(String title) {
+            this.Title = title;
+        }
+ 
+        public String getContent() {
+            return Content;
+        }
+ 
+        public void setContent(String content) {
+            this.Content = content;
+        }
+ 
+        public String getAutor() {
+            return Autor;
+        }
+ 
+        public void setAutor(String autor) {
+            this.Autor = autor;
+        }
+    }
+ 
+}
