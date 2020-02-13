@@ -1,0 +1,45 @@
+package com.company;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       int num=Integer.parseInt(scanner.nextLine());
+       Map<String,List<String>> result=new LinkedHashMap<>();
+        for (int i = 0; i <num ; i++) {
+            String key=scanner.nextLine();
+            String value=scanner.nextLine();
+            result.putIfAbsent(key,new ArrayList<>());
+            result.get(key).add(value);
+
+        }
+        String pattern="%s - %s";
+        for (Map.Entry<String,List<String>>kvp:result.entrySet()) {
+            String key=kvp.getKey();
+            String value= String.join(", ",kvp.getValue());
+            System.out.println(String.format(pattern,key,value));
+
+
+
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

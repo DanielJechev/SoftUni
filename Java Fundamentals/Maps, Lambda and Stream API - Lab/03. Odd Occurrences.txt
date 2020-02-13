@@ -1,0 +1,57 @@
+package com.company;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       List<String> input=Arrays.stream(scanner.nextLine().split(" ")).collect(Collectors.toList());
+       Map<String,Integer> name=new LinkedHashMap<>();
+        for (String in:input) {
+            String lower=in.toLowerCase();
+if (name.containsKey(lower)){
+    name.put(lower,name.get(lower)+1);
+}else {
+    name.put(lower,1);
+}
+        }
+ArrayList<String> odd=new ArrayList<>();
+        for ( Map.Entry<String,Integer>kvp:name.entrySet()) {
+            if (kvp.getValue()%2==1){
+                odd.add(kvp.getKey());
+            }
+
+
+        }
+
+        for (int i = 0; i <odd.size() ; i++) {
+            System.out.print(odd.get(i));
+            if (i<odd.size()-1){
+                System.out.print(", ");
+            }
+
+        }
+
+
+
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
