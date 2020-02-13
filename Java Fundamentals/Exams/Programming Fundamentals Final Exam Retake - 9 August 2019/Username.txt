@@ -1,0 +1,80 @@
+package com.company;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String name=scanner.nextLine();
+        String command=scanner.nextLine();
+        while (!"Sign up".equals(command)){
+            String[] tokens=command.split(" ");
+            String input=tokens[0];
+            if ("Case".equals(input)){
+                String something=tokens[1];
+                if (something.equals("lower")){
+                    name=name.toLowerCase();
+                    System.out.println(name);
+                }else if (something.equals("upper")){
+                    name=name.toUpperCase();
+                    System.out.println(name);
+                }
+
+
+            }else if ("Reverse".equals(input)){
+                int first=Integer.parseInt(tokens[1]);
+                int second=Integer.parseInt(tokens[2]);
+                String out = name.substring(first, second + 1);
+                StringBuilder builder = new StringBuilder();
+                builder.append(out);
+                builder = builder.reverse();
+
+
+
+                if (first!=-1&&second!=-1){
+
+                    System.out.println(builder);
+
+                }
+
+            }else if ("Cut".equals(input)){
+                String string=tokens[1];
+                if (name.contains(string)){
+                    name=name.replace(string,"");
+                    System.out.println(name);
+                }else {
+                    System.out.printf("The word %s doesn't contain %s.%n",name,string);
+                }
+
+
+            }else if ("Replace".equals(input)){
+                String string=tokens[1];
+                name=name.replace(string,"*");
+                System.out.println(name);
+
+            }else if ("Check".equals(input)){
+                String string=tokens[1];
+                if (name.contains(string)){
+                    System.out.println("Valid");
+                }else {
+                    System.out.printf("Your username must contain %s.%n",string);
+                }
+
+            }
+
+
+
+
+
+
+            command=scanner.nextLine();
+        }
+
+
+
+
+
+    }
+
+}
