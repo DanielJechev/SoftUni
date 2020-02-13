@@ -1,0 +1,53 @@
+package com.company;
+
+
+import java.text.DecimalFormat;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+ List<String> name=Arrays.stream(scanner.nextLine().split("#")).collect(Collectors.toList());
+ int water=Integer.parseInt(scanner.nextLine());
+ int sum=0;
+ double result=0;
+        System.out.println("Cells:");
+        for (String str:name) {
+            String[] tokens=str.split(" = "  );
+            String type=tokens[0];
+            int range =Integer.parseInt(tokens[1]);
+             if ("Low".equals(type)&&range>=1&&range<=50||"Medium".equals(type)&&range>=51&&range<=80||"High".equals(type)&&range>=81&&range<=125){
+            if (water>=range) {
+                System.out.println(" - " + range);
+                sum = sum + range;
+                water=water-range;
+                result = sum * 0.25;
+            }
+             }
+
+        }
+        System.out.printf("Effort: %.2f%n",result);
+
+        System.out.printf("Total Fire: %d",sum);
+
+
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
