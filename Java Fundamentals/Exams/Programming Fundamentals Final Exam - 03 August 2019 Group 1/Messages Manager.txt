@@ -1,0 +1,79 @@
+package com.company;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int capacity = scanner.nextInt();
+
+        Map<String, Integer> sentMessages = new LinkedHashMap<>();
+        Map<String, Integer> receivedMessages = new LinkedHashMap<>();
+
+        String input = scanner.nextLine();
+
+        while (!input.equals("Statistics")) {
+            String[] tokens = input.split("=");
+            String command = tokens[0];
+
+
+            if (command.equals("Add")) {
+                String name = tokens[1];
+
+                if (!sentMessages.containsKey(name)) {
+                    int sent = Integer.parseInt(tokens[2]);
+                    int received = Integer.parseInt(tokens[3]);
+                    sentMessages.put(name, sent);
+                    receivedMessages.put(name, received);
+                }
+
+            } else if (command.equals("Message")) {
+                String sender = tokens[1];
+                String receiver = tokens[2];
+
+                if (sentMessages.containsKey(sender) && receivedMessages.containsKey(receiver)) {
+                    sentMessages.put(sender, sentMessages.get(sender) + 1);
+                    receivedMessages.put(receiver, receivedMessages.get(receiver) + 1);
+
+                    int sumSender = Integer.parseInt(String.valueOf(sentMessages.get(sender))) + Integer.parseInt(String.valueOf(receivedMessages.get(sender)));
+                    int sumReceiver = Integer.parseInt(String.valueOf(sentMessages.get(receiver))) + Integer.parseInt(String.valueOf(receivedMessages.get(receiver)));
+
+                    if (sumSender >= capacity) {
+                        System.out.println(sender + " reached the capacity!");
+                        sentMessages.remove(sender);
+                        receivedMessages.remove(sender);
+                    }
+                    if (sumReceiver >= capacity) {
+                        System.out.println(receiver + " reached the capacity!");
+                        sentMessages.remove(receiver);
+                        receivedMessages.remove(receiver);
+                    }
+                }
+            } else if (command.equals("Empty")) {
+                String option = tokens[1];
+                if (!option.equals("All")) {
+                    sentMessages.remove(option);
+                    receivedMessages.remove(option);
+                } else {
+                    sentMessages.clear();
+                    receivedMessages.clear();
+                }
+
+            }
+            input = scanner.nextLine();
+        }
+
+        System.out.println("Users count: " + sentMessages.size());
+
+        receivedMessages.entrySet().stream()
+                .sorted(Collections.reverseOrder(
+                        Map.Entry.<String, Integer>comparingByValue())
+                        .thenComparing(Map.Entry.comparingByKey()))
+                .forEach(p -> {
+                    int sum = p.getValue() + sentMessages.get(p.getKey());
+                    System.out.println(p.getKey() + " - " + sum);
+                });
+    }
+}

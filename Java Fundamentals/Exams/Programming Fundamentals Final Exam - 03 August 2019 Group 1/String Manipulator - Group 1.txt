@@ -1,0 +1,101 @@
+package com.company;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input=scanner.nextLine();
+        String command=scanner.nextLine();
+
+        while (!"End".equals(command)){
+            String[] tokens=command.split(" ");
+            String read=tokens[0];
+            if ("Translate".equals(read)) {
+            String first=tokens[1];
+            String second=tokens[2];
+             input=  input.replace(first,second);
+                System.out.println(input);
+
+
+
+
+
+            }else if ("Includes".equals(read)){
+                String string=tokens[1];
+                if (input.contains(string)){
+                    System.out.println("True");
+                }else {
+                    System.out.println("False");
+                }
+
+            }else if ("Start".equals(read)){
+                String string=tokens[1];
+            if ( input.startsWith(string)){
+                System.out.println("True");
+            }else {
+                System.out.println("False");
+            }
+
+            }else if ("Lowercase".equals(read)){
+               input=input.toLowerCase();
+                System.out.println(input);
+
+            }else if ("FindIndex".equals(read)){
+                String string=tokens[1];
+                int take=input.lastIndexOf(string);
+                if (take!=-1){
+                    System.out.println(take);
+                    take=input.lastIndexOf(string,take);
+                }
+
+
+
+
+
+
+
+            }else if ("Remove".equals(read)) {
+               int first=Integer.parseInt(tokens[1]);
+               int second=Integer.parseInt(tokens[2]);
+               StringBuilder builder=new StringBuilder();
+               builder.append(input);
+               builder=builder.delete(first,second);
+                System.out.println(builder);
+
+                }
+
+
+            command=scanner.nextLine();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

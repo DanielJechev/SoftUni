@@ -1,0 +1,59 @@
+package com.company;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int num=Integer.parseInt(scanner.nextLine());
+        String regex="^(\\$|\\%)([A-Z][a-z]{3,}+)\\1\\: \\[([0-9]+)\\]\\|\\[([0-9]+)\\]\\|\\[([0-9]+)\\]\\|$";
+        Pattern pattern=Pattern.compile(regex);
+
+        for (int i = 0; i <num ; i++) {
+            String input=scanner.nextLine();
+            Matcher matcher=pattern.matcher(input);
+            String thirdString=new String();
+            String fourthString=new String();
+            String fifthString=new String();
+            StringBuilder builder=new StringBuilder();
+
+
+            if (matcher.find()){
+                String name=matcher.group(2);
+                builder.append(name);
+                int thirdGroup=Integer.parseInt(matcher.group(3));
+                thirdString+=(char) thirdGroup;
+                int fourthGroup=Integer.parseInt(matcher.group(4));
+                fourthString+=(char)fourthGroup;
+                int fifthGroup=Integer.parseInt(matcher.group(5));
+                fifthString+=(char)fifthGroup;
+                System.out.printf("%s: %s%s%s%n",builder,thirdString,fourthString,fifthString);
+            }else {
+                System.out.println("Valid message not found!");
+            }
+
+
+
+
+
+
+
+        }
+
+
+
+    }
+
+      }
+
+
+
+
+
+
+
+
+
+
+
