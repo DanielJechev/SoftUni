@@ -1,0 +1,74 @@
+package com.company;
+
+
+import java.text.DecimalFormat;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int input=Integer.parseInt(scanner.nextLine());
+        List <String> lista=new ArrayList<>();
+        for (int i = 0; i <input; i++) {
+            String name = scanner.nextLine();
+            String[]tokens=name.split(" +");
+            String type=tokens[0];
+
+
+
+            if (name.contains("is going")){
+                    if (lista.contains(type)){
+                        System.out.printf("%s is already in the list!%n",type);
+                    }else {
+                        lista.add(type);
+                    }
+
+            }else {
+                if (!lista.remove(type)){
+                    
+                    System.out.printf("%s is not in the list!%n",type);
+
+
+
+                }
+            }
+
+
+
+
+
+
+
+        }
+        for (String output:lista) {
+            System.out.println(output);
+        }
+
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

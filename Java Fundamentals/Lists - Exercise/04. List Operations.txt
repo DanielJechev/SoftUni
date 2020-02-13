@@ -1,0 +1,101 @@
+package com.company;
+
+
+import java.text.DecimalFormat;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       List<Integer> input=Arrays.stream(scanner.nextLine().split(" +")).map(Integer::parseInt).collect(Collectors.toList());
+       String command=scanner.nextLine();
+       while (!"End".equals(command)) {
+           String[] tokens = command.split(" +");
+           String type = tokens[0];
+           if ("Add".equals(type)) {
+               int num = Integer.parseInt(tokens[1]);
+               input.add(num);
+           } else if ("Insert".equals(type)) {
+               int num = Integer.parseInt(tokens[1]);
+               int index = Integer.parseInt(tokens[2]);
+               if (index < 0 || index >=input.size()){
+                   System.out.println("Invalid index");
+
+               }else {
+                   input.add(index, num);
+               }
+
+           } else if ("Remove".equals(type)) {
+               int index = Integer.parseInt(tokens[1]);
+               if (  index <0 || index > input.size()) {
+                   System.out.println("Invalid index");
+
+               } else {
+                   input.remove(index);
+
+               }
+
+           } else if ("Shift".equals(type)) {
+               if ("left".equals(tokens[1])) {
+                   int num = Integer.parseInt(tokens[2]);
+                   for (int i = 0; i < num; i++) {
+                       int first = input.get(0);
+                       input.remove(0);
+                       input.add(first);
+                       
+
+
+                   }
+               } else if ("right".equals(tokens[1])) {
+                   int num = Integer.parseInt(tokens[2]);
+                   for (int i = 0; i < num; i++) {
+                       int last = input.get(input.size() - 1);
+                       input.remove(input.size() - 1);
+                       input.add(0, last);
+                       
+                   }
+               }
+
+           }
+
+
+
+           command=scanner.nextLine();
+       }
+        for (int out:input) {
+            System.out.print(out+" ");
+        }
+
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

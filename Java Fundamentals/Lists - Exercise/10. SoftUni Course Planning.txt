@@ -1,0 +1,132 @@
+package com.company;
+
+
+import java.text.DecimalFormat;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+     List<String> name =Arrays.stream(scanner.nextLine().split(", ")).collect(Collectors.toList());
+     String command=scanner.nextLine();
+    while (!"course start".equals(command)){
+        String []tokens=command.split(":");
+        String type=tokens[0];
+        if ("Add".equals(type)){
+            String dobavi=tokens[1];
+            if (!name.contains(dobavi)){
+                name.add(dobavi);
+            }
+        }else if ("Insert".equals(type)){
+            String dobavi=tokens[1];
+            int index=Integer.parseInt(tokens[2]);
+            if (!name.contains(dobavi)){
+                name.add(index,dobavi);
+            }
+        }else  if ("Remove".equals(type)){
+            String lesson=tokens[1];
+            String exerciseOfLessn=lesson+ "-Exercise";
+            if (name.contains(lesson)){
+                name.remove(lesson);
+            }else if (name.contains(lesson)&&name.contains(exerciseOfLessn)){
+                name.remove(lesson);
+                name.remove(exerciseOfLessn);
+            }
+
+
+        }else if ("Swap".equals(type)){
+            String first=tokens[1];
+            String second=tokens[2];
+
+            if ((name.contains(first) && name.contains(first + "-Exercise")) && name.contains(second) && name.contains(second + "-Exercise")) {
+                int firstIndex = name.indexOf(first);
+               int  secondIndex = name.indexOf(second);
+
+                Collections.swap(name, firstIndex, secondIndex);
+                Collections.swap(name, firstIndex + 1, secondIndex + 1);
+            }  else if ((name.contains(first) && name.contains(first + "-Exercise") && name.contains(second))) {
+
+                 int firstIndex = name.indexOf(first);
+                int secondIndex = name.indexOf(second);
+
+                name.remove(firstIndex + 1);
+                Collections.swap(name, firstIndex, secondIndex);
+                name.add(secondIndex + 1, first + "-Exercise");
+            } else   if ((name.contains(second) && name.contains(second + "-Exercise")) && (name.contains(first))) {
+
+              int  secondIndex = name.indexOf(second);
+                int firstIndex = name.indexOf(first);
+
+                name.remove(secondIndex + 1);
+                Collections.swap(name, firstIndex, secondIndex);
+                name.add(firstIndex + 1, second + "-Exercise");
+
+            }else  if ((name.contains(first) && name.contains(second))) {
+
+                int firstIndex = name.indexOf(first);
+                int  secondIndex = name.indexOf(second);
+
+                name.set(firstIndex, second);
+                name.set(secondIndex, first);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }else if ("Exercise".equals(type)){
+            String lesson=tokens[1];
+            String exerciseOfLesson=lesson + "-Exercise";
+            if (name.contains(lesson)&& !name.contains(exerciseOfLesson)){
+                int index=name.indexOf(lesson);
+                name.add(index+1,exerciseOfLesson);
+            }else if (!name.contains(lesson)){
+                name.add(lesson);
+                name.add(exerciseOfLesson);
+            }
+
+
+        }
+
+command=scanner.nextLine();
+    }
+        for (int i = 0; i <name.size(); i++) {
+            System.out.printf("%d.%s%n",i+1,name.get(i));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

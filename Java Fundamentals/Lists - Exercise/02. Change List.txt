@@ -1,0 +1,63 @@
+package com.company;
+
+
+import java.text.DecimalFormat;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+         List<Integer> input=Arrays.stream(scanner.nextLine().split(" +")).map(Integer::parseInt).collect(Collectors.toList());
+         String command=scanner.nextLine();
+         while (!"end".equals(command)){
+             String[]tokens=command.split(" +");
+             String type =tokens[0];
+             if ("Delete".equals(type)){
+                 int num =Integer.parseInt(tokens[1]);
+                     input.removeIf(n -> n == num);
+
+             }else if ("Insert".equals(type)){
+                 int num=Integer.parseInt(tokens[1]);
+                 int index=Integer.parseInt(tokens[2]);
+                 if (index<input.size()) {
+                     input.add(index, num);
+                 }
+             }
+
+             command=scanner.nextLine();
+         }
+        for (int out:input) {
+            System.out.print(out+" ");
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
