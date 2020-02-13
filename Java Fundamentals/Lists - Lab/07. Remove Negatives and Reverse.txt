@@ -1,0 +1,60 @@
+package com.company;
+
+
+import java.text.DecimalFormat;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Integer> a=Arrays.stream(scanner.nextLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+        List<Integer> name=new ArrayList<>();
+        Collections.reverse(a);
+        a.removeIf(n-> n <0);
+
+
+
+        if (a.isEmpty()) {
+            
+            System.out.println("empty");
+        }
+        for (int out: a){
+            if (out>=0){
+                System.out.print(out+ " ");
+            }
+        }
+
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

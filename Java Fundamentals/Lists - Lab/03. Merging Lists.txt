@@ -1,0 +1,62 @@
+package com.company;
+
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+   List<Integer> a=Arrays.stream(scanner.nextLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+   List<Integer> b=Arrays.stream(scanner.nextLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+ List <Integer> result = new ArrayList<>();
+ int minLength=Math.min(a.size(),b.size());
+        for (int i = 0; i <minLength ; i++) {
+            result.add(a.get(i));
+            result.add(b.get(i));
+        }
+if (a.size()>b.size()){
+    result.addAll(a.subList(minLength,a.size()));
+}else {
+    result.addAll(b.subList(minLength,b.size()));
+}
+        for (int output:result) {
+            System.out.print(output + " ");
+        }
+
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
