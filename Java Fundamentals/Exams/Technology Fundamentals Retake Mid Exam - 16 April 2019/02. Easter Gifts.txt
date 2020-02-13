@@ -1,0 +1,92 @@
+package com.company;
+
+
+import java.text.DecimalFormat;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<String> name = Arrays.stream(scanner.nextLine().split(" ")).collect(Collectors.toList());
+        String command = scanner.nextLine();
+        while (!"No Money".equals(command)) {
+            String[] tokens = command.split(" ");
+            String type = tokens[0];
+            if ("OutOfStock".equals(type)) {
+                String first = tokens[1];
+                String second = "None";
+                for (int i = 0; i < name.size(); i++) {
+                    if (name.contains(first)) {
+                        int index = name.indexOf(first);
+                        name.set(index, second);
+                    }
+                }
+
+
+            } else if ("Required".equals(type)) {
+                String first = tokens[1];
+                int index=Integer.parseInt(tokens[2]);
+                if (index>=0&&index<name.size()){
+                    name.remove(index);
+                    name.add(index,first);
+                }
+
+            }else if ("JustInCase".equals(type)){
+                String first=tokens[1];
+                        String take=name.get(name.size() - 1);
+                        name.remove(take);
+                        name.add(first);
+
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+        command = scanner.nextLine();
+    }
+        for (int i = 0; i <name.size() ; i++) {
+
+
+            if (name.contains("None")) {
+                name.remove((Object) "None");
+            }
+        }
+
+        for (String out:name) {
+
+
+
+
+            System.out.print(out+" ");
+        }
+
+
+}
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+

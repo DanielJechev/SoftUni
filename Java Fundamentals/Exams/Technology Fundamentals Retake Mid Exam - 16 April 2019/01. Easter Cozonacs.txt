@@ -1,0 +1,49 @@
+package com.company;
+
+
+import java.text.DecimalFormat;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double budget=Double.parseDouble(scanner.nextLine());
+        double priceForFloor=Double.parseDouble(scanner.nextLine());
+      double priceForEggs= 0.75*priceForFloor;
+      double literMilk=1.25*priceForFloor;
+      double quarterMilk=literMilk/4;
+      double totalPrice=priceForFloor+priceForEggs+quarterMilk;
+      int count=0;
+      int eggs=0;
+      while (budget>totalPrice){
+          budget=budget-totalPrice;
+          count++;
+          eggs=eggs+3;
+if (count%3==0){
+    eggs=eggs-(count-2);
+
+
+
+} 
+      }
+        System.out.printf("You made %d cozonacs! Now you have %d eggs and %.2fBGN left.",count,eggs,budget);
+
+
+
+
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
