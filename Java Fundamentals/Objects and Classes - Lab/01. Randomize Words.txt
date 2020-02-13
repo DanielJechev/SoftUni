@@ -1,0 +1,31 @@
+package com.company;
+
+
+import java.lang.reflect.Array;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<String> name=Arrays.stream(scanner.nextLine().split(" ")).collect(Collectors.toList());
+        Collections.shuffle(name);
+        for (String out: name) {
+            System.out.println(out);
+        }
+
+
+    }
+}
+
+
+
+
+
+
+
+
+

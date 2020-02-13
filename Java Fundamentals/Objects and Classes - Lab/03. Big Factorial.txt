@@ -1,0 +1,34 @@
+package com.company;
+
+
+import java.lang.reflect.Array;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int factriel=Integer.parseInt(scanner.nextLine());
+        BigInteger result=BigInteger.ONE;
+        for (int i = 1; i <=factriel ; i++) {
+            result=result.multiply(BigInteger.valueOf(i));
+
+
+
+        }
+        System.out.println(result);
+    }
+}
+
+
+
+
+
+
+
+
+
