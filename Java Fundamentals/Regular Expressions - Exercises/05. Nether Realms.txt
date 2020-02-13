@@ -1,0 +1,47 @@
+package com.company;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+      List<String> demons=Arrays.stream(scanner.nextLine().split("[, ]+")).sorted(String::compareTo).collect(Collectors.toList());
+      String healthRegex="([^\\d\\+\\-*\\/.])";
+      String damageRegex="(-?\\d+\\.?\\d*)";
+      String operation="(\\*|\\/)";
+      Pattern pattern=Pattern.compile(healthRegex);
+      Pattern pattern1=Pattern.compile(damageRegex);
+      Pattern pattern2=Pattern.compile(operation);
+        for (String demon:demons) {
+            Matcher matcher=pattern.matcher(demon);
+            int health=0;
+
+            while (matcher.find()) {
+                health += matcher.group(1).charAt(0);
+            }
+            matcher=pattern1.matcher(demon);
+            double damage=0;
+
+           while (matcher.find()){
+               damage+=Double.parseDouble(matcher.group(1));
+           }
+matcher=pattern2.matcher(demon);
+
+while (matcher.find()){
+    if (matcher.group(1).equals("*")){
+        damage*=2;
+
+    }else {
+        damage/=2;
+    }
+}
+
+            System.out.printf("%s - %d health, %.2f damage%n",demon,health,damage);
+
+        }
+    }
+}

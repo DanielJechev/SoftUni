@@ -1,0 +1,39 @@
+package com.company;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String regex=">>([A-Za-z]+)<<([0-9]+\\.?[0-9]+)!([0-9]+)";
+        String command=scanner.nextLine();
+        Pattern pattern=Pattern.compile(regex);
+        List<String>names=new ArrayList<>();
+        double result=0;
+
+        while (!"Purchase".equals(command)){
+            Matcher matcher=pattern.matcher(command);
+            while (matcher.find()){
+                String text=matcher.group(1);
+                double price=Double.parseDouble(matcher.group(2));
+                int quantity=Integer.parseInt(matcher.group(3));
+                names.add(text);
+                result+=price*quantity;
+
+            }
+
+            command=scanner.nextLine();
+        }
+        System.out.println("Bought furniture:");
+
+        for (String name:names) {
+            System.out.println(name);
+        }
+        System.out.printf("Total money spend: %.2f",result);
+
+    }
+}
