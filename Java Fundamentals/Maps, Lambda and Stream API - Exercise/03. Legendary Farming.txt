@@ -1,0 +1,117 @@
+package com.company;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+     Map<String,Integer> junk=new TreeMap<>();
+     Map<String,Integer> name=new TreeMap<>();
+     name.put("motes",0);
+     name.put("fragments",0);
+     name.put("shards",0);
+     int[]  collected=new int[3];
+
+while (!(collected[0]>=250||collected[1]>=250||collected[2]>=250)){
+
+
+
+    String[] tokens=scanner.nextLine().split("\\s+");
+    for (int i = 0; i <tokens.length ; i+=2) {
+        int quantity=Integer.parseInt(tokens[i]);
+        String material=tokens[i+1].toLowerCase();
+        if (name.containsKey(material)){
+            int value= name.get(material)+quantity;
+            name.put(material,value);
+            if ("motes".equals(material)){
+                collected[0]=collected[0]+quantity;
+
+            }else if ("fragments".equals(material)){
+                collected[1]=collected[1]+quantity;
+            }else if ("shards".equals(material)){
+                collected[2]=collected[2]+quantity;
+
+            }
+            if (collected[0]>=250||collected[1]>=250||collected[2]>=250){
+                break;
+            }
+
+
+
+
+        }
+        else {
+            if (!junk.containsKey(material)){
+                junk.put(material,quantity);
+            }else {
+
+                junk.put(material,junk.get(material)+quantity);
+
+
+            }
+        }
+
+
+    }
+
+
+
+
+
+
+}
+String item=" ";
+if (collected[0]>=250){
+    int value=name.get("motes")-250;
+    name.put("motes",value);
+    item="Dragonwrath";
+}else if (collected[1]>=250){
+    int value=name.get("fragments")-250;
+    name.put("fragments",value);
+    item="Valanyr";
+}else {
+    int value=name.get("shards")-250;
+    name.put("shards",value);
+    item="Shadowmourne";
+}
+        System.out.println(item + " obtained! ");
+name.entrySet().stream().sorted((f,s) -> {
+    int result= s.getValue().compareTo(f.getValue());
+    if (result==0){
+        result=f.getKey().compareTo(s.getKey());
+    }
+    return result;
+
+
+
+        }).forEach(junka-> {
+    System.out.println(junka.getKey()+": "+junka.getValue());
+        });
+
+
+
+        for (Map.Entry<String,Integer>junka:junk.entrySet()) {
+            System.out.println(junka.getKey()+": "+junka.getValue());
+        }
+
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

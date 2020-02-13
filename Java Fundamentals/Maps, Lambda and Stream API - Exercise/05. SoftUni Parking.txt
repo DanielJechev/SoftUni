@@ -1,0 +1,48 @@
+package com.company;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int num=Integer.parseInt(scanner.nextLine());
+        Map<String,String> name=new LinkedHashMap<>();
+        for (int i = 1; i <=num ; i++) {
+            String command=scanner.nextLine();
+            String[] tokens=command.split("\\s+");
+            if (tokens[0].equals("register")){
+                String type=tokens[1];
+                String value=tokens[2];
+                if (name.containsKey(type)){
+                    System.out.printf("ERROR: already registered with plate number %s%n",value);
+                }else {
+                    name.put(type,value);
+                    System.out.printf("%s registered %s successfully%n",type,value);
+                }
+
+            }else if (tokens[0].equals("unregister")){
+                String type=tokens[1];
+
+                if (!name.containsKey(type)){
+                    System.out.printf("ERROR: user %s not found%n",type);
+                }else if (name.containsKey(type)){
+                    name.remove(type);
+                    System.out.printf("%s unregistered successfully%n",type);
+                }
+
+
+
+            }
+
+
+        }
+        for (Map.Entry<String,String>out:name.entrySet()) {
+            System.out.println(out.getKey()+ " => " + out.getValue());
+
+
+        }
+
+
+    }
+}

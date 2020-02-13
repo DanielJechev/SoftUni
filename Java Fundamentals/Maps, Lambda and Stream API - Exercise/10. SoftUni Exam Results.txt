@@ -1,0 +1,78 @@
+package com.company;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Map<String,Integer> usersWithPoints=new LinkedHashMap<>();
+        Map<String,Integer> languages=new LinkedHashMap<>();
+       String command=scanner.nextLine();
+       while (!"exam finished".equals(command)){
+           String[] tokens=command.split("-");
+           String username=tokens[0];
+           String language=tokens[1];
+           if ("banned".equals(language)){
+               usersWithPoints.remove(username);
+                   command=scanner.nextLine();
+                   continue;
+
+           }
+
+
+
+
+           if (!usersWithPoints.containsKey(username)){
+              int currentPoints=Integer.parseInt(tokens[2]);
+              usersWithPoints.put(username,currentPoints);
+          }else {
+              int currentPoints=Integer.parseInt(tokens[2]);
+              int points= usersWithPoints.get(username);
+              if (points<currentPoints){
+                  usersWithPoints.put(username,currentPoints);
+              }
+
+          }
+
+
+          if (!languages.containsKey(language)){
+              languages.put(language,1);
+          }else {
+              int count=languages.get(language)+1;
+              languages.put(language,count);
+          }
+
+           command=scanner.nextLine();
+       }
+        System.out.println("Results:");
+       usersWithPoints.entrySet().stream().sorted((f,s) -> {
+           int result= s.getValue().compareTo(f.getValue());
+           if (result==0){
+               result=f.getKey().compareTo(s.getKey());
+           }
+           return result;
+       }).forEach(entry->{
+           String username=entry.getKey();
+           int points=entry.getValue();
+           System.out.printf("%s | %d%n",username,points);
+       });
+        System.out.println("Submissions:");
+        languages.entrySet().stream().sorted((f,s) -> {
+            int result= s.getValue().compareTo(f.getValue());
+            if (result==0){
+                result=f.getKey().compareTo(s.getKey());
+            }
+            return result;
+        }).forEach(entry->{
+            String language=entry.getKey();
+            int count=entry.getValue();
+            System.out.printf("%s - %d%n",language,count);
+        });
+
+
+
+
+
+    }
+}

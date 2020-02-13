@@ -1,0 +1,47 @@
+package com.company;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input=scanner.nextLine();
+     Map<Character,Integer> name=new LinkedHashMap<>();
+
+        for (char in:input.toCharArray()) {
+            if (in != ' ') {
+
+
+                if (!name.containsKey(in)) {
+                    name.put(in, 1);
+                }else {
+                    int oldValue = name.get(in);
+                    name.put(in, oldValue + 1);
+                }
+            }
+        }
+
+        for (Map.Entry<Character,Integer>kvp:name.entrySet()) {
+            System.out.println(kvp.getKey()+" -> " + kvp.getValue());
+        }
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

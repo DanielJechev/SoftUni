@@ -1,0 +1,42 @@
+package com.company;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Map<String, List<String>> name = new TreeMap<>();
+        String commnad = scanner.nextLine();
+        while (!"End".equals(commnad)) {
+            String[] tokens = commnad.split(" -> ");
+            String type = tokens[0];
+            String value = tokens[1];
+            if (!name.containsKey(type)) {
+                List<String> number = new ArrayList<>();
+                number.add(value);
+                name.put(type, number);
+
+            } else if (name.containsKey(type)) {
+                List<String> number = name.get(type);
+                if (!number.contains(value)) {
+                    number.add(value);
+                    name.put(type, number);
+                }
+
+            }
+
+
+            commnad = scanner.nextLine();
+        }
+
+        for (Map.Entry<String, List<String>> entry : name.entrySet()) {
+            System.out.println(entry.getKey());
+            for (int i = 0; i < entry.getValue().size(); i++) {
+                System.out.printf("-- %s%n", entry.getValue().get(i));
+            }
+
+        }
+
+    }
+}

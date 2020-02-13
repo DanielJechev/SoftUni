@@ -1,0 +1,44 @@
+package com.company;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Map<String, List<Double>> name=new LinkedHashMap<>();
+        String command=scanner.nextLine();
+        while (!"buy".equals(command)){
+            String [] tokens=command.split(" ");
+            String type=tokens[0];
+            Double price=Double.parseDouble(tokens[1]);
+            int quantity=Integer.parseInt(tokens[2]);
+            if (!name.containsKey(type)){
+                List<Double> value=new ArrayList<>();
+                value.add(price);
+                value.add(quantity*1.00);
+                name.put(type,value);
+
+            }else {
+                List<Double> value= name.get(type);
+                value.set(0,price);
+                quantity+=value.get(1);
+                value.set(1,quantity*1.00);
+                name.put(type,value);
+
+            }
+
+
+
+
+            command=scanner.nextLine();
+        }
+        for (Map.Entry<String,List<Double>>out:name.entrySet()) {
+            List<Double> arr = out.getValue();
+            System.out.printf("%s -> %.2f%n",out.getKey(),arr.get(0)*arr.get(1));
+        }
+
+
+
+    }
+}

@@ -1,0 +1,50 @@
+package com.company;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String command=scanner.nextLine();
+        Map<String,List<String>>name=new LinkedHashMap<>();
+        while (!"end".equals(command)){
+         String[] tokens=command.split(" : ");
+         String type=tokens[0];
+         String value=tokens[1];
+         if (!name.containsKey(type)){
+             List<String> students=new ArrayList<>();
+             students.add(value);
+             name.put(type,students);
+
+         }else if (name.containsKey(type)){
+             List<String> students= name.get(type);
+             students.add(value);
+             name.put(type,students);
+
+         }
+
+
+
+            command=scanner.nextLine();
+        }
+
+         name.entrySet().stream().sorted((e1,e2)-> Integer.compare(e2.getValue().size(),e1.getValue().size()))
+                .forEach(entry -> {
+                    System.out.printf("%s: %d%n", entry.getKey(), entry.getValue().size());
+                    List<String> names = entry.getValue();
+                    Collections.sort(names);
+
+
+                    for (int i = 0; i < names.size(); i++) {
+                        System.out.println("-- " + entry.getValue().get(i));
+                    }
+                });
+
+
+
+
+
+
+    }
+}

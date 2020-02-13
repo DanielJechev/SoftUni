@@ -1,0 +1,33 @@
+package AssociativeArraysExcercise;
+import java.util.*;
+public class StudentAcademy {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Map<String, List<Double>> students = new LinkedHashMap<>();
+        int n = Integer.parseInt(scanner.nextLine());
+ 
+        for (int i = 0; i < n; i++) {
+            String name = scanner.nextLine();
+            Double grade = Double.parseDouble(scanner.nextLine());
+ 
+            students.putIfAbsent(name, new ArrayList<>());
+            students.get(name).add(grade);
+        }
+ 
+        Map<String, Double> studentGrades = new LinkedHashMap<>();
+ 
+        for (Map.Entry<String, List<Double>> entry : students.entrySet()) {
+            double grade = entry.getValue().stream().mapToDouble(x->x).average().getAsDouble();
+ 
+            if (grade >= 4.50) {
+                studentGrades.put(entry.getKey(), grade);
+            }
+        }
+ 
+        studentGrades.entrySet().stream().sorted((a, b) -> b.getValue().compareTo(a.getValue())).forEach(student ->{
+            System.out.println(String.format("%s -> %.2f", student.getKey(), student.getValue()));
+        } );
+ 
+ 
+    }
+}
