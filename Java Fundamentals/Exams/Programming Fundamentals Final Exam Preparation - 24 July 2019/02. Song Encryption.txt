@@ -1,0 +1,72 @@
+package FinalExam1218;
+ 
+import java.util.Scanner;
+ 
+public class Problem2SongEncryption {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+ 
+        String command = scanner.nextLine();
+ 
+        while (!command.equals("end")) {
+ 
+            if (command.matches("[A-Z][a-z'\\s]+:[A-Z\\s]+")) {
+ 
+                System.out.printf("Successful encryption: %s%n", encrypt(command));
+ 
+            } else {
+                System.out.println("Invalid input!");
+            }
+ 
+            command = scanner.nextLine();
+        }
+    }
+ 
+ 
+    static String encrypt(String input) {
+ 
+        String artist = input.split(":")[0];
+        int key = artist.length();
+ 
+        StringBuilder output = new StringBuilder();
+ 
+        for (int i = 0; i < input.length(); i++) {
+            char current = input.charAt(i);
+ 
+            if (current != ' ' && current != '\'') {
+ 
+                if (current == ':') {
+                    current = '@';
+                    output.append(current);
+                    continue;
+                }
+ 
+ 
+                if (Character.isLowerCase(current)) {
+ 
+                    if ((char) (current + key) > 'z') {
+ 
+                        current = (char) (96 + ((current + key) - 122));
+ 
+                    } else {
+                        current = (char) (current + key);
+                    }
+ 
+                } else { // <-- IF UPPER CASE
+ 
+                    if ((char) (current + key) > 'Z') {
+ 
+                        current = (char) (64 + ((current + key) - 90));
+ 
+                    } else {
+                        current = (char) (current + key);
+                    }
+                }
+ 
+            }
+ 
+            output.append(current);
+        }
+        return output.toString();
+    }
+}

@@ -1,0 +1,106 @@
+package com.company;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+          String command=scanner.nextLine();
+          Map<String,List<String>> first=new LinkedHashMap<>();
+          Map<String,Integer> second=new LinkedHashMap<>();
+          int time=0;
+
+
+          while (!"start of concert".equals(command)){
+              String[] tokens=command.split("; ");
+              String input=tokens[0];
+              if("Add".equals(input)){
+                  String bandName=tokens[1];
+                  if (!first.containsKey(bandName)){
+                      first.put(bandName,new ArrayList<>());
+                  }
+                  List<String> value=first.get(bandName);
+                  String[] members=tokens[2].split(", ");
+                  for (int i = 0; i <members.length ; i++) {
+                      if (!value.contains(members[i])){
+                          value.add(members[i]);
+                      }
+
+
+
+                  }
+
+
+
+              }
+
+
+
+              if ("Play".equals(input)){
+                  String type=tokens[1];
+                  if (!second.containsKey(type)){
+                      second.put(type,0);
+                  }
+                  int  value=Integer.parseInt(tokens[2]);
+                  time+=value;
+                  int oldValue=second.get(type);
+                  second.put(type,oldValue+value);
+
+
+
+
+
+
+              }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              command=scanner.nextLine();
+          }
+        System.out.printf("Total time: %d%n" , time);
+        second.entrySet().stream().sorted((f,s) -> {
+            int result=s.getValue().compareTo(f.getValue());
+            if (result==0){
+                result=f.getKey().compareTo(s.getKey());
+            }
+            return result;
+        }).forEach(entry->{
+            System.out.printf("%s -> %d%n ",entry.getKey(),entry.getValue());
+
+
+
+        });
+        String afterall=scanner.nextLine();
+        System.out.println(afterall);
+        List<String> all=first.get(afterall);
+        for (String alli:all) {
+            System.out.printf("=> %s%n", alli);
+        }
+
+
+
+
+
+
+
+    }
+}
