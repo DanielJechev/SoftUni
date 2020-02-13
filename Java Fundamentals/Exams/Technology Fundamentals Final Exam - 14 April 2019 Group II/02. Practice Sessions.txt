@@ -1,0 +1,71 @@
+package com.company;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Map<String ,List<String>> name=new LinkedHashMap<>();
+        String command=scanner.nextLine();
+        while (!"END".equals(command)){
+            String [] tokens=command.split("->");
+            String input=tokens[0];
+            String type=tokens[1];
+            if ("Add".equals(input)){
+                if (!name.containsKey(type)){
+                    name.put(type,new ArrayList<>());
+                }
+                String[] arr=tokens[2].split("->");
+                for (int i = 0; i <arr.length ; i++) {
+                    name.get(type).add(arr[i]);
+                }
+
+
+
+            }else if ("Move".equals(input)){
+
+                String[] arr=tokens[2].split("->");
+                String next=tokens[3];
+                for (int i = 0; i <arr.length ; i++) {
+                    if (name.get(type).contains(arr[i])){
+                        name.get(next).add(arr[i]);
+                        name.get(type).remove(arr[i]);
+
+
+                    }
+                }
+
+
+
+
+            }else if ("Close".equals(input)){
+                name.remove(type);
+            }
+
+
+
+
+
+            command=scanner.nextLine();
+        }
+        System.out.println("Practice sessions:");
+
+        name.entrySet().stream().sorted((f,s) -> {
+            int result= s.getValue().size()-(f.getValue()).size();
+            if (result==0){
+                result=f.getKey().compareTo(s.getKey());
+            }
+            return result;
+        }).forEach(entry->{
+            System.out.println(entry.getKey());
+            for (String s:entry.getValue()) {
+                System.out.printf("++%s%n",s);
+            }
+    });
+
+
+
+}
+
+}

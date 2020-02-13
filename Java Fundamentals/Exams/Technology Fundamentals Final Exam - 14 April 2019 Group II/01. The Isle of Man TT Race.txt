@@ -1,0 +1,45 @@
+package com.company;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String regex="([\\#\\$\\%\\*\\&])([A-Za-z]+)\\1\\=(\\d+)!!(.+)";
+        String input=scanner.nextLine();
+        Pattern pattern=Pattern.compile(regex);
+        while (!"".equals(input)){
+            Matcher matcher=pattern.matcher(input);
+            while (matcher.find()) {
+                String name = matcher.group(2);
+                int num = Integer.parseInt(matcher.group(3));
+                String last = matcher.group(4);
+                if (num == last.length()) {
+                    String something = last;
+                    int number = num;
+                    StringBuilder take = new StringBuilder();
+                    for (int i = 0; i < last.length(); i++) {
+                        char ch = last.charAt(i);
+                        char encrypt = (char) (ch + num);
+                        take.append(encrypt);
+
+                    }
+                    System.out.printf("Coordinates found! %s -> %s", name, take);
+                    return;
+                }
+            }
+            System.out.printf("Nothing found!%n");
+
+
+            input=scanner.nextLine();
+        }
+
+
+
+    }
+
+}
