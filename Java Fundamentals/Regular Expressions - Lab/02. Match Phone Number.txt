@@ -1,0 +1,27 @@
+package com.company;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       String regex="\\+359([-| ])2\\1[0-9]{3}\\1[0-9]{4}\\b";
+       String input=scanner.nextLine();
+       Pattern pattern=Pattern.compile(regex);
+       Matcher matcher=pattern.matcher(input);
+       List<String>name=new ArrayList<>();
+       while (matcher.find()) {
+           name.add(matcher.group());
+       }
+           System.out.println(String.join(", ",name));
+
+
+
+
+
+    }
+}
