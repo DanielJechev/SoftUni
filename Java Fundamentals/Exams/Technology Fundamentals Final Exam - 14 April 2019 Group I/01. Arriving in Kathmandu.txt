@@ -1,0 +1,59 @@
+package com.company;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String regex="(^[A-Za-z0-9#?@?!?\\??$?]+)=([0-9]+)<<(.+)$";
+        String input=scanner.nextLine();
+        Pattern pattern=Pattern.compile(regex);
+        while (!"Last note".equals(input)){
+            Matcher matcher=pattern.matcher(input);
+            if (matcher.find()) {
+                String firstGroup = matcher.group(1);
+                int secondGroup = Integer.parseInt(matcher.group(2));
+                String thirdGroup = matcher.group(3);
+                StringBuilder builder = new StringBuilder();
+                if (secondGroup!=thirdGroup.length()){
+                    System.out.println("Nothing found!");
+                }else {
+
+                for (int i = 0; i < firstGroup.length(); i++) {
+                    char symbol = firstGroup.charAt(i);
+                    if (Character.isLetterOrDigit(symbol)) {
+                        builder.append(symbol);
+                    }
+                }
+               
+                    System.out.printf("Coordinates found! %s -> %s%n", builder, thirdGroup);
+                    
+
+                }
+
+
+            }else {
+                System.out.println("Nothing found!");
+
+
+            }
+
+
+
+
+
+
+
+            input=scanner.nextLine();
+        }
+
+
+
+
+
+
+
+
+    }
+}

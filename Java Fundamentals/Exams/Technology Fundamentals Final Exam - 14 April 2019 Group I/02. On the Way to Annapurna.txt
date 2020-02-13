@@ -1,0 +1,69 @@
+package com.company;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Map<String,List<String>>name=new LinkedHashMap<>();
+        String commnad=scanner.nextLine();
+        while (!"END".equals(commnad)){
+            String[] tokens=commnad.split("->");
+            String input=tokens[0];
+            String type=tokens[1];
+            if ("Add".equals(input)) {
+                if (!name.containsKey(type)) {
+                    name.put(type, new ArrayList<>());
+                }
+                    String []arr=tokens[2].split(",");
+                    for (int i = 0; i <arr.length ; i++) {
+                       name.get(type).add(arr[i]);
+                    }
+
+
+
+            }else if ("Remove".equals(input)){
+                name.remove(type);
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+            commnad=scanner.nextLine();
+        }
+
+        System.out.println("Stores list:");
+
+
+        name.entrySet().stream().sorted((f,s) -> {
+            int result= s.getValue().size()-(f.getValue()).size();
+            if (result==0){
+                result=s.getKey().compareTo(f.getKey());
+            }
+            return result;
+        }).forEach(entry-> {
+                    System.out.printf("%s%n", entry.getKey());
+
+
+            for (String s:entry.getValue()){
+
+
+                System.out.printf("<<%s>>%n", s);
+            }
+        } );
+
+
+
+}
+
+}
