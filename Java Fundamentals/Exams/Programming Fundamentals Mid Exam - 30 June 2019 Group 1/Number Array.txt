@@ -1,0 +1,71 @@
+package com.company;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Integer> name = Arrays.stream(scanner.nextLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+        String command = scanner.nextLine();
+        while (!"End".equals(command)) {
+            String[] tokens = command.split(" ");
+            String input = tokens[0];
+            if ("Switch".equals(input)) {
+                int index = Integer.parseInt(tokens[1]);
+                if (index >= 0 && index < name.size()) {
+                    int num = (-1) * name.get(index);
+                    name.set(index, num);
+                }
+
+
+            } else if ("Change".equals(input)) {
+                int index = Integer.parseInt(tokens[1]);
+                int num = Integer.parseInt(tokens[2]);
+                if (index >= 0 && index < name.size()) {
+                    name.set(index, num);
+                }
+            } else if ("Sum".equals(input)) {
+                if ("Negative".equals(tokens[1])) {
+                    int sum = 0;
+                    for (int i = 0; i < name.size(); i++) {
+                        if (name.get(i) < 0) {
+                            sum = sum + name.get(i);
+                        }
+                    }
+                    System.out.println(sum);
+                } else if ("Positive".equals(tokens[1])) {
+                    int sum = 0;
+                    for (int i = 0; i < name.size(); i++) {
+                        if (name.get(i) > 0) {
+                            sum += name.get(i);
+                        }
+
+
+                    }
+                    System.out.println(sum);
+                }
+                if ("All".equals(tokens[1])) {
+                    int sum = 0;
+                    for (int i = 0; i < name.size(); i++) {
+                        sum += name.get(i);
+
+                    }
+                    System.out.println(sum);
+                }
+
+
+            }
+
+
+            command = scanner.nextLine();
+        }
+        for (Integer names : name) {
+            if (names >= 0) {
+                System.out.print(names + " ");
+            }
+
+        }
+
+    }
+}

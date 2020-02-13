@@ -1,0 +1,49 @@
+package com.company;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<String> name=Arrays.stream(scanner.nextLine().split(" ")).collect(Collectors.toList());
+        String command=scanner.nextLine();
+        while (!command.contains("Print")){
+            String [] tokens=command.split(" ");
+            String input=tokens[0];
+            if ("Add".equals(input)){
+                String contact=tokens[1];
+                int index=Integer.parseInt(tokens[2]);
+                if (!name.contains(contact)){
+                    name.add(contact);
+                }else  if (index>=0&&index<name.size()){
+                    name.add(index,contact);
+                }
+
+
+            }else if ("Remove".equals(input)) {
+                int index = Integer.parseInt(tokens[1]);
+                if (index >= 0 && index < name.size()) {
+                    name.remove(index);
+                }
+
+
+            }
+
+            command=scanner.nextLine();
+        }
+        name.add(0,"Contacts:");
+
+        if (command.contains("Normal")) {
+            for (String names : name) {
+                System.out.print(names + " ");
+            }
+        }else if (command.contains("Reversed")){
+         Collections.reverse(name);
+            for (String names : name) {
+                System.out.print(names + " ");
+            }
+        }
+
+    }
+}
