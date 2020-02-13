@@ -1,0 +1,35 @@
+package com.company;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] user=scanner.nextLine().split(", " );
+        for (String username:user) {
+            if ( validator(username)){
+                System.out.println(username);
+            }
+
+        }
+
+    }
+    
+    public static boolean validator(String username){
+        if (username.length()<3||username.length()>16){
+            return false;
+        }
+
+        for (int i = 0; i < username.length(); i++) {
+            char symbol=username.charAt(i);
+            if (!Character.isLetterOrDigit(symbol)&&symbol != '-' && symbol != '_'){
+                return false;
+            }
+            
+        }
+        return true;
+    }
+    
+    
+}

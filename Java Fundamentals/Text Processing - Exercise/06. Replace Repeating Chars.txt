@@ -1,0 +1,18 @@
+package stringExercises;
+ 
+import java.util.Scanner;
+ 
+public class ex6 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+ 
+        String input = scanner.nextLine();
+        char b = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (b != input.charAt(i)){
+                b = input.charAt(i);
+                System.out.printf("%c",b);
+            }
+        }
+    }
+}

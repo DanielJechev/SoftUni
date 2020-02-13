@@ -1,0 +1,15 @@
+package com.company;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+       String text=scanner.nextLine();
+        for (Character symol:text.toCharArray()) {
+            System.out.print((char)(symol + 3));
+        }
+}
+
+}
