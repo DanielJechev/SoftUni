@@ -1,0 +1,168 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int rows = Integer.parseInt(reader.readLine());
+        int sum=0;
+
+        char [][] matrix=new char[rows][rows];
+  int playerRow=0;
+  int playerCol=0;
+      int  firstHoleRow=-1;
+       int firstHoleCol=-1;
+       int secondHoleRow=-1;
+       int secondHoleCol=-1;
+
+        for (int r = 0; r <rows ; r++) {
+            String line = reader.readLine();
+            matrix[r] = line.toCharArray();
+            if (line.contains("S")){
+             playerRow=r;
+             playerCol=line.indexOf("S");
+            }
+
+                if (line.contains("O") && firstHoleRow == -1) {
+                    firstHoleRow = r;
+                    firstHoleCol = line.indexOf("O");
+
+                } else if (line.contains("O") && secondHoleRow == -1) {
+                    secondHoleRow = r;
+                    secondHoleCol = line.indexOf("O");
+            }
+        }
+
+            while (sum<50) {
+                String[] tokens = reader.readLine().split(" ");
+                String commnad = tokens[0];
+                if (commnad.equals("up")) {
+                    if (playerRow - 1 >= 0 && playerRow - 1 < matrix.length && playerCol >= 0 && playerCol < matrix[playerRow - 1].length) {
+                        matrix[playerRow][playerCol] = '-';
+                        playerRow--;
+                        if (Character.isDigit(matrix[playerRow][playerCol])) {
+                            sum += matrix[playerRow][playerCol] - '0';
+                        }
+                        if (matrix[playerRow][playerCol] == 'O') {
+                            matrix[playerRow][playerCol] = '-';
+                            matrix[firstHoleRow][firstHoleCol] = '-';
+                            matrix[secondHoleRow][secondHoleCol] = 'S';
+                            playerRow = secondHoleRow;
+                            playerCol = secondHoleCol;
+
+                        }
+                    } else {
+                        matrix[playerRow][playerCol] = '-';
+                        System.out.println("Bad news, the spaceship went to the void.");
+                        System.out.println("Star power collected: " + sum);
+                        for (int r = 0; r < matrix.length; r++) {
+                            for (int c = 0; c < matrix[r].length; c++) {
+                                System.out.print(matrix[r][c] + "");
+                            }
+                            System.out.println();
+                        }
+                        break;
+                    }
+
+
+                    matrix[playerRow][playerCol] = 'S';
+                } else if (commnad.equals("down")) {
+                    if (playerRow + 1 >= 0 && playerRow + 1 < matrix.length && playerCol >= 0 && playerCol < matrix[playerRow + 1].length) {
+                        matrix[playerRow][playerCol] = '-';
+                        playerRow++;
+                        if (Character.isDigit(matrix[playerRow][playerCol])) {
+                            sum += matrix[playerRow][playerCol] - '0';
+                        }
+                        if (matrix[playerRow][playerCol] == 'O') {
+                            matrix[playerRow][playerCol] = '-';
+                            matrix[firstHoleRow][firstHoleCol] = '-';
+                            matrix[secondHoleRow][secondHoleCol] = 'S';
+                            playerRow = secondHoleRow;
+                            playerCol = secondHoleCol;
+
+                        }
+                    } else {
+                        matrix[playerRow][playerCol] = '-';
+                        System.out.println("Bad news, the spaceship went to the void.");
+                        System.out.println("Star power collected: " + sum);
+                        for (int r = 0; r < matrix.length; r++) {
+                            for (int c = 0; c < matrix[r].length; c++) {
+                                System.out.print(matrix[r][c] + "");
+                            }
+                            System.out.println();
+                        }
+                        break;
+                    }
+                    matrix[playerRow][playerCol] = 'S';
+                } else if (commnad.equals("left")) {
+                    if (playerRow >= 0 && playerRow < matrix.length && playerCol - 1 >= 0 && playerCol - 1 < matrix[playerRow].length) {
+                        matrix[playerRow][playerCol] = '-';
+                        playerCol--;
+                        if (Character.isDigit(matrix[playerRow][playerCol])) {
+                            sum += matrix[playerRow][playerCol] - '0';
+                        }
+                        if (matrix[playerRow][playerCol] == 'O') {
+                            matrix[playerRow][playerCol] = '-';
+                            matrix[firstHoleRow][firstHoleCol] = '-';
+                            matrix[secondHoleRow][secondHoleCol] = 'S';
+                            playerRow = secondHoleRow;
+                            playerCol = secondHoleCol;
+
+                        }
+                    } else {
+                        matrix[playerRow][playerCol] = '-';
+                        System.out.println("Bad news, the spaceship went to the void.");
+                        System.out.println("Star power collected: " + sum);
+                        for (int r = 0; r < matrix.length; r++) {
+                            for (int c = 0; c < matrix[r].length; c++) {
+                                System.out.print(matrix[r][c] + "");
+                            }
+                            System.out.println();
+                        }
+                        break;
+                    }
+                    matrix[playerRow][playerCol] = 'S';
+
+                } else if (commnad.equals("right")) {
+                    if (playerRow >= 0 && playerRow < matrix.length && playerCol + 1 >= 0 && playerCol + 1 < matrix[playerRow].length) {
+                        matrix[playerRow][playerCol] = '-';
+                        playerCol++;
+                        if (Character.isDigit(matrix[playerRow][playerCol])) {
+                            sum += matrix[playerRow][playerCol] - '0';
+                        }
+                        if (matrix[playerRow][playerCol] == 'O') {
+                            matrix[playerRow][playerCol] = '-';
+                            matrix[firstHoleRow][firstHoleCol] = '-';
+                            matrix[secondHoleRow][secondHoleCol] = 'S';
+                            playerRow = secondHoleRow;
+                            playerCol = secondHoleCol;
+
+                        }
+                    } else {
+                        matrix[playerRow][playerCol] = '-';
+                        System.out.println("Bad news, the spaceship went to the void.");
+                        System.out.println("Star power collected: " + sum);
+                        for (int r = 0; r < matrix.length; r++) {
+                            for (int c = 0; c < matrix[r].length; c++) {
+                                System.out.print(matrix[r][c] + "");
+                            }
+                            System.out.println();
+                        }
+                        break;
+                    }
+                    matrix[playerRow][playerCol] = 'S';
+                }
+            }
+if (sum>=50) {
+    System.out.println("Good news! Stephen succeeded in collecting enough star power!");
+    System.out.println("Star power collected: " + sum);
+    for (int r = 0; r < matrix.length; r++) {
+        for (int c = 0; c < matrix[r].length; c++) {
+            System.out.print(matrix[r][c] + "");
+        }
+        System.out.println();
+    }
+}
+        }
+        }
