@@ -1,0 +1,40 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        ArrayDeque<Integer> stack=new ArrayDeque<>();
+        Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).forEach(stack::push);
+        ArrayDeque<Integer> queue=new ArrayDeque<>();
+        Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).forEach(queue::offer);
+        ArrayDeque<Integer> queueOutput=new ArrayDeque<>();
+           while (!stack.isEmpty()&&!queue.isEmpty()){
+          int first=stack.pop();
+          int second=queue.poll();
+         if (second>first){
+                   queue.addFirst(second);
+               } else if (first>second){
+                 int result=first+second;
+                 queueOutput.offer(result);
+         }else if (first==second){
+       int   sum=first+1;
+        stack.push(sum);
+    }
+           }
+        int num=queueOutput.peek();
+        for (Integer out:queueOutput) {
+            if (out.compareTo(num)>0){
+                num=out;
+            }
+        }
+        System.out.println(num);
+
+        for (Integer out:queueOutput) {
+            System.out.print(out+ " ");
+        }
+
+    }
+}
