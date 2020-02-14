@@ -1,0 +1,49 @@
+package com.company;
+import javafx.collections.transformation.SortedList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int row=Integer.parseInt(reader.readLine());
+        int col=Integer.parseInt(reader.readLine());
+char [][] array=new char[row][col];
+        for (int r = 0; r <row ; r++) {
+          String[] line=reader.readLine().split(" ");
+            for (int c = 0; c < line.length; c++) {
+                array[r][c]=line[c].charAt(0);
+            }
+        }
+        char[][] secondArray=new char[row][col];
+        for (int r = 0; r < row; r++) {
+            String[] line=reader.readLine().split(" ");
+            for (int c = 0; c <line.length ; c++) {
+                secondArray[r][c]=line[c].charAt(0);
+            }
+        }
+
+        for (int r = 0; r <array.length ; r++) {
+            char [] first=array[r];
+            char [] second=secondArray[r];
+            for (int c = 0; c <first.length ; c++) {
+                if (first[c]!=second[c]){
+                    first[c]='*';
+                }
+            }
+        }
+        for (int r = 0; r <array.length ; r++) {
+            char[]first=array[r];
+            for (int c = 0; c <first.length ; c++) {
+                System.out.print(first[c]+ " ");
+
+            }
+            System.out.println();
+        }
+
+
+
+            }
+}

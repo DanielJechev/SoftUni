@@ -1,0 +1,111 @@
+package com.company;
+import javafx.collections.transformation.SortedList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+       char [][] array=new char[8][8];
+        for (int r = 0; r <8 ; r++) {
+            String[] line = reader.readLine().split(" ");
+            for (int c = 0; c < line.length; c++) {
+                array[r][c] = line[c].charAt(0);
+            }
+        }
+        for (int r = 0; r <array.length ; r++) {
+            char[] first=array[r];
+            for (int c = 0; c <first.length ; c++) {
+                if (array[r][c]=='q') {
+                    boolean isColValid = checkQueenCol(array, c);
+                    boolean isRowValid = checkQueenRow(array, r);
+
+                    boolean isMainDiagonalValidUpAndLeft = checkMainDiagonalUpLeft(array, r, c);
+                    boolean isMainDiagonalValidDownAndRight = checkMainDiagonaDownRight(array, r, c);
+                    boolean isSecondaryDiagonalValidUpAndRight = checkSecondaryDiagonaUpRight(array, r, c);
+                    boolean isSecondaryDiagonalValidDownAndLeft = checkSecondaryDiagonaDownLeft(array, r, c);
+                    if (isColValid && isRowValid && isMainDiagonalValidDownAndRight && isMainDiagonalValidUpAndLeft && isSecondaryDiagonalValidDownAndLeft && isSecondaryDiagonalValidUpAndRight) {
+                        System.out.println(r + " " + c);
+
+                    }
+                }
+            }
+        }
+
+    }
+
+    private static boolean checkSecondaryDiagonaDownLeft(char[][] array, int row, int col) {
+        row++;
+        col--;
+        while (row<8&&col>=0){
+            if (array[row++][col--]=='q'){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    private static boolean checkSecondaryDiagonaUpRight(char[][] array, int row, int col) {
+        row--;
+        col++;
+        while (row>=0&&col<8){
+            if (array[row--][col++]=='q'){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean checkMainDiagonaDownRight(char[][] array, int row, int col) {
+        row++;
+        col++;
+        while (row<8&&col<8){
+            if (array[row++][col++]=='q'){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    private static boolean checkMainDiagonalUpLeft(char[][] array, int row, int col) {
+        row--;
+        col--;
+        while (row>=0&&col>=0){
+            if (array[row--][col--]=='q'){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean checkQueenRow(char[][] array, int row) {
+        int queens=0;
+        for (int r = 0; r < array.length; r++) {
+
+            char symbol=array[row][r];
+            if (symbol=='q'){
+                queens++;
+            }
+        }
+        return queens==1;
+
+    }
+
+    private static boolean checkQueenCol(char[][] array, int col) {
+        int queens=0;
+        for (int r = 0; r < array.length; r++) {
+
+            char symbol=array[r][col];
+            if (symbol=='q'){
+                queens++;
+            }
+        }
+        return queens==1;
+    }
+
+}
+

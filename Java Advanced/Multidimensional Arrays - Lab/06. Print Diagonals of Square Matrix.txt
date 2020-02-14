@@ -1,0 +1,38 @@
+package com.company;
+import javafx.collections.transformation.SortedList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int[] input=Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int size=input[0];
+        int[][] array=new int[size][];
+        for (int r = 0; r <size ; r++) {
+            array[r] = Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        }
+int row=0;
+int col=0;
+       while (row<size&&col<size){
+int element=array[row][col];
+           System.out.print(element+  " ");
+row++;
+col++;
+       }
+       row=size-1;
+       col=0;
+        System.out.println();
+       while (row>=0&&col<size){
+           int element=array[row][col];
+           System.out.print(element+ " ");
+
+           row--;
+           col++;
+       }
+
+
+    }
+}
