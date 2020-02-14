@@ -1,0 +1,41 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int input=Integer.parseInt(reader.readLine());
+        ArrayDeque<String> stack=new ArrayDeque<>();
+        Arrays.stream(reader.readLine().split(" ")).forEach(stack::push);
+        ArrayDeque<String> bukvite=new ArrayDeque<>();
+        ArrayDeque<Integer> cifrite=new ArrayDeque<>();
+        int sum=0;
+        while (!stack.isEmpty()){
+            String currentElement=stack.pop();
+            if (Character.isDigit(currentElement.charAt(0))){
+                int element=Integer.parseInt(currentElement);
+                   if (sum+element>input){
+                       System.out.print(bukvite.remove()+ " -> ");
+                       while (!cifrite.isEmpty()){
+                           if (cifrite.size()==1){
+                               System.out.print(cifrite.remove());
+                           }else {
+                               System.out.print(cifrite.remove() + ", ");
+                           }
+                       }
+                       System.out.println();
+                  sum=0;
+                       }
+                   if (bukvite.isEmpty()){
+                       continue;
+                   }
+                sum+=element;
+               cifrite.add(element);
+            }else {
+                bukvite.add(currentElement);
+            }
+        }
+    }
+}
