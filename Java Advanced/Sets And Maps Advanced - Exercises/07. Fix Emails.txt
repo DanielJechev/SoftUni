@@ -1,0 +1,27 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Map<String,String> name=new LinkedHashMap<>();
+        String input=reader.readLine();
+        while (!"stop".equals(input)){
+            String s=reader.readLine();
+            name.putIfAbsent(input,s);
+            if (s.endsWith(".com")||s.endsWith(".uk")||s.endsWith(".us")){
+                name.remove(input,s);
+            }
+
+            input=reader.readLine();
+        }
+        for (Map.Entry<String,String>kvp:name.entrySet()) {
+            System.out.println(String.format("%s -> %s",kvp.getKey(),kvp.getValue()));
+        }
+    }
+}

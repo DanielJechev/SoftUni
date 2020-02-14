@@ -1,0 +1,25 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Map<String,Integer> name=new LinkedHashMap<>();
+        String input=reader.readLine();
+        while (!"stop".equals(input)){
+            int num=Integer.parseInt(reader.readLine());
+            name.putIfAbsent(input,0);
+            name.put(input,name.get(input)+num);
+
+            input=reader.readLine();
+        }
+        for (Map.Entry<String,Integer>kvp:name.entrySet()) {
+            System.out.println(String.format("%s -> %d",kvp.getKey(),kvp.getValue()));
+        }
+    }
+}

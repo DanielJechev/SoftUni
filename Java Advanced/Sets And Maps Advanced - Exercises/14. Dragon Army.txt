@@ -1,0 +1,47 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+             int num=Integer.parseInt(reader.readLine());
+             Map<String,Map<String,int[]>> name=new LinkedHashMap<>();
+        for (int i = 0; i <num ; i++) {
+            String []input=reader.readLine().split(" ");
+           String type=input[0];
+           String ime=input[1];
+        int damage=input[2].equals("null")?45:Integer.parseInt(input[2]);
+        int health=input[3].equals("null")?250:Integer.parseInt(input[3]);
+        int armor=input[4].equals("null")?10:Integer.parseInt(input[4]);
+name.putIfAbsent(type,new TreeMap<>());
+name.get(type).put(ime,new int[]{damage,health,armor});
+
+        }
+      name.entrySet().forEach(entry->{
+          double averageDamage=entry.getValue().entrySet().stream().mapToInt(e->e.getValue()[0]).average().orElse(0.0);
+          double averageHealth=entry.getValue().entrySet().stream().mapToInt(e->e.getValue()[1]).average().orElse(0.0);
+          double averageArmor=entry.getValue().entrySet().stream().mapToInt(e->e.getValue()[2]).average().orElse(0.0);
+          System.out.println(String.format("%s::(%.2f/%.2f/%.2f)",entry.getKey(),averageDamage,averageHealth,averageArmor));
+entry.getValue().entrySet().forEach(innerEntry->{
+            System.out.printf("-%s -> damage: %d, health: %d, armor: %d%n",innerEntry.getKey(),innerEntry.getValue()[0],innerEntry.getValue()[1],innerEntry.getValue()[2]);
+
+
+        }
+
+        );
+
+
+              });
+
+
+
+
+    }
+
+
+}
