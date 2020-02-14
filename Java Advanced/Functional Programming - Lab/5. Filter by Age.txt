@@ -1,0 +1,50 @@
+package com.company;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.*;
+import java.util.stream.Collectors;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BiPredicate<Map.Entry<String,Integer>,Integer> youngerThan=(person, ageLimit) -> person.getValue()<ageLimit;
+        BiPredicate<Map.Entry<String,Integer>,Integer> olderThan=(person, ageLimit) -> person.getValue()>=ageLimit;
+        Consumer<Map.Entry<String,Integer>> printName=person->System.out.println(person.getKey());
+        Consumer<Map.Entry<String,Integer>> printAge=person->System.out.println(person.getValue());
+        Consumer<Map.Entry<String,Integer>> printNameAndAge=person->System.out.printf("%s - %d%n",person.getKey(),person.getValue());
+
+        BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+	 int count=Integer.parseInt(bufferedReader.readLine());
+        LinkedHashMap<String,Integer> people=new LinkedHashMap<>();
+
+        for (int i = 0; i <count ; i++) {
+            String[] personData=bufferedReader.readLine().split(", ");
+
+            people.put(personData[0],Integer.parseInt(personData[1]));
+        }
+        String comparison=bufferedReader.readLine();
+        int ageLimit=Integer.parseInt(bufferedReader.readLine());
+        String printType=bufferedReader.readLine();
+people.entrySet().stream().filter(person->comparison.equals("younger")?youngerThan.test(person,ageLimit):olderThan.test(person,ageLimit))
+        .forEach(person->{
+            switch (printType){
+                case "age":
+                    printAge.accept(person);
+                    break;
+                case "name":
+                    printName.accept(person);
+                    break;
+                default:
+                    printNameAndAge.accept(person);
+                    break;
+            }
+        });
+
+    }
+}
