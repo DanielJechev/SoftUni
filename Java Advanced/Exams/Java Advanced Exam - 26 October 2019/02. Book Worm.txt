@@ -1,0 +1,101 @@
+package com.company;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String output = reader.readLine();
+        int rows = Integer.parseInt(reader.readLine());
+        char[][] matrix = new char[rows][rows];
+        List<Character> help = new ArrayList<>();
+        int playerRow = 0;
+        int playerCol = 0;
+        for (int r = 0; r < rows; r++) {
+            String line = reader.readLine();
+            matrix[r] = line.toCharArray();
+            if (line.contains("P")) {
+                playerRow = r;
+                playerCol = line.indexOf("P");
+            }
+        }
+        String com=reader.readLine();
+
+        while (!"end".equals(com)) {
+            String[] tokens = com.split(" ");
+            if (tokens[0].equals("up")) {
+                if (playerRow - 1 >= 0 && playerRow - 1 < matrix.length && playerCol >= 0 && playerCol < matrix[playerRow - 1].length) {
+                    matrix[playerRow][playerCol] = '-';
+                    playerRow--;
+                    if (Character.isAlphabetic(matrix[playerRow][playerCol])) {
+                        help.add(matrix[playerRow][playerCol]);
+                    }
+                    matrix[playerRow][playerCol] = 'P';
+                }else {
+                    help.remove(help.size()-1);
+                }
+            } else if (tokens[0].equals("down")) {
+                if (playerRow + 1 >= 0 && playerRow + 1 < matrix.length && playerCol >= 0 && playerCol < matrix[playerRow + 1].length) {
+                    matrix[playerRow][playerCol] = '-';
+                    playerRow++;
+                    if (Character.isAlphabetic(matrix[playerRow][playerCol])) {
+                        help.add(matrix[playerRow][playerCol]);
+                    }
+                    matrix[playerRow][playerCol] = 'P';
+                }else {
+                    help.remove(help.size()-1);
+                }
+            }else if (tokens[0].equals("left")) {
+                if (playerRow >= 0 && playerRow < matrix.length && playerCol - 1 >= 0 && playerCol - 1 < matrix[playerRow].length) {
+                    matrix[playerRow][playerCol] = '-';
+                    playerCol--;
+                    if (Character.isAlphabetic(matrix[playerRow][playerCol])) {
+                        help.add(matrix[playerRow][playerCol]);
+                    }
+
+                    matrix[playerRow][playerCol] = 'P';
+                }else {
+                    help.remove(help.size()-1);
+
+                }
+            }else if (tokens[0].equals("right")) {
+                if (playerRow >= 0 && playerRow < matrix.length && playerCol + 1 >= 0 && playerCol + 1 < matrix[playerRow].length) {
+                    matrix[playerRow][playerCol] = '-';
+                    playerCol++;
+                    if (Character.isAlphabetic(matrix[playerRow][playerCol])) {
+                        help.add(matrix[playerRow][playerCol]);
+                    }
+                    matrix[playerRow][playerCol] = 'P';
+                }else {
+                    help.remove(help.size()-1);
+                }
+            }
+
+            com = reader.readLine();
+        }
+
+        System.out.print(output);
+        if (help.size()>0) {
+            for (Character character : help) {
+                System.out.print(character);
+            }
+        }
+        System.out.println();
+
+
+        for (int r = 0; r < matrix.length; r++) {
+            for (int c = 0; c < matrix[r].length; c++) {
+                System.out.print(matrix[r][c] + "");
+            }
+            System.out.println();
+        }
+
+    }
+
+}

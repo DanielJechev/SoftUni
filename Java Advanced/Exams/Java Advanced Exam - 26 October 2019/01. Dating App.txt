@@ -1,0 +1,84 @@
+package com.company;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        ArrayDeque<Integer> stackMales = new ArrayDeque<>();
+        Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).forEach(stackMales::push);
+        ArrayDeque<Integer> queeFemales = new ArrayDeque<>();
+        Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).forEach(queeFemales::offer);
+        int countMatch = 0;
+        while (!stackMales.isEmpty() && !queeFemales.isEmpty()) {
+            int firstMale = stackMales.pop();
+            int secondFemale = queeFemales.poll();
+            if (firstMale == secondFemale) {
+                countMatch++;
+            }
+            if (firstMale <= 0) {
+                queeFemales.addFirst(secondFemale);
+                continue;
+            }
+            if (secondFemale <= 0) {
+                stackMales.push(firstMale);
+                continue;
+            }
+
+
+            if (firstMale != secondFemale) {
+                firstMale = firstMale - 2;
+                stackMales.push(firstMale);
+            }
+            if (firstMale % 25 == 0) {
+                stackMales.pop();
+                
+            }
+            if (secondFemale%25==0) {
+                queeFemales.poll();
+
+
+            }
+
+
+
+        }
+
+
+        System.out.println(String.format("Matches: %d", countMatch));
+
+        if (stackMales.isEmpty()) {
+            System.out.println(String.format("Males left: none"));
+        } else {
+            if (stackMales.size() == 1) {
+                System.out.print("Males left: "+stackMales.pop());
+                System.out.println();
+            } else {
+                System.out.print(stackMales.pop() + ", ");
+            }
+        }
+
+
+        if (queeFemales.isEmpty()) {
+            System.out.println(String.format("Females left: none"));
+        } else {
+            if (queeFemales.size() == 1) {
+                System.out.print("Females left: "+queeFemales.remove());
+                System.out.println();
+            } else {
+                System.out.print(queeFemales.remove() + ", ");
+            }
+        }
+
+
+    }
+}
+
+
