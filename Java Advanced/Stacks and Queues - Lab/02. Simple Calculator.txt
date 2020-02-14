@@ -1,0 +1,51 @@
+package com.company;
+
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+          ArrayDeque<String> stack=new ArrayDeque<>();
+          String input=scanner.nextLine();
+          String[] els=input.split("\\s+");
+        for (int i = els.length-1; i >=0 ; i--) {
+           stack.push(els[i]);
+       }
+
+
+
+
+      while (stack.size()>1){
+          int first=Integer.parseInt(stack.pop());
+          String op=stack.pop();
+          int second=Integer.parseInt(stack.pop());
+if ("+".equalsIgnoreCase(op)){
+    stack.push(first + second + "");
+}else {
+    stack.push(first - second + "");
+}
+
+      }
+        System.out.println(stack.peek());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+}

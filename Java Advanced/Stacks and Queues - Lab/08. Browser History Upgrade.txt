@@ -1,0 +1,52 @@
+import java.util.ArrayDeque;
+import java.util.Scanner;
+ 
+public class queue1_Lab_8Browser_History_Upgrade {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+ 
+        ArrayDeque<String> stack = new ArrayDeque<>();
+        ArrayDeque<String> stakFW = new ArrayDeque<>();
+ 
+ 
+        while (!input.equals("Home")) {
+ 
+            if (input.equals("back")) {
+ 
+                if (stack.size() > 1) {
+ 
+                    String url = stack.pop();
+                    stakFW.push(url);
+                    System.out.println(stack.peek());
+                   
+                } else {
+                    System.out.println("no previous URLs");
+                }
+            } else if (input.equals("forward")) {
+ 
+                if (stakFW.isEmpty()) {
+                    System.out.println("no next URLs");
+                } else {
+                    String url = stakFW.pop();
+                    System.out.println(url);
+                    stack.push(url);
+ 
+                }
+            } else {
+                stakFW.clear();
+                stack.push(input);
+                System.out.println(stack.peek());
+            }
+ 
+            input = scanner.nextLine();
+        }
+ 
+ 
+     
+ 
+ 
+    }
+ 
+ 
+}
