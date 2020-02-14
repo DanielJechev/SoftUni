@@ -1,0 +1,84 @@
+package com.company;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<String> name=Arrays.stream(scanner.nextLine().split(" ")).collect(Collectors.toList());
+        String command=scanner.nextLine();
+        while (!command.contains("Print")){
+            String[] tokens=command.split(" ");
+            String input=tokens[0];
+            if ("Join".equals(input)){
+                String animal=tokens[1];
+                if (!name.contains(animal)) {
+                    name.add(animal);
+                }
+            }else if ("Jump".equals(input)){
+                String animal=tokens[1];
+                int index=Integer.parseInt(tokens[2]);
+                if (index>=0&&index<name.size()){
+                    name.add(index,animal);
+                }
+
+
+            }else if ("Dive".equals(input)){
+                int num=Integer.parseInt(tokens[1]);
+                if (num>=0&&num<name.size()) {
+                    name.remove(num);
+                }
+
+
+            }else if ("First".equals(input)){
+                int num=Integer.parseInt(tokens[1]);
+                if (name.size()>=num){
+                    for (int i = 0; i <num ; i++) {
+                        System.out.print(name.get(i)+ " ");
+                    }
+                }else {
+                    for (int i = 0; i <name.size() ; i++) {
+                        System.out.print(name.get(i)+ " ");
+                    }
+                }
+
+
+
+            }else if ("Last".equals(input)){
+                int num=Integer.parseInt(tokens[1]);
+                if (name.size()>=num){
+                    for (int i = name.size()-num ;i<name.size(); i++) {
+                        System.out.print(name.get(i)+ " ");
+                    }
+                }else {
+                    for (int i = 0; i <name.size() ; i++) {
+                        System.out.print(name.get(i)+ " ");
+                    }
+                }
+
+
+            }
+
+
+
+
+
+            command=scanner.nextLine();
+        }
+        System.out.print("\nFrogs: ");
+        if (command.contains("Reversed")) {
+            Collections.reverse(name);
+            for (String names : name) {
+                System.out.print(names + " ");
+            }
+        }else if (command.contains("Normal")){
+            for (String names : name) {
+                System.out.print(names + " ");
+            }
+        }
+
+
+    }
+
+}

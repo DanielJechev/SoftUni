@@ -1,0 +1,35 @@
+package com.company;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+     double sizeOfSise=Double.parseDouble(scanner.nextLine());
+     int numberOfSheet=Integer.parseInt(scanner.nextLine());
+     double areaSingleSheet=Double.parseDouble(scanner.nextLine());
+     double area=sizeOfSise*sizeOfSise*6;
+     double sum=0;
+     double sum1=0;
+     int count=0;
+     int count1=0;
+
+        for (int i = 1; i <= numberOfSheet; i++) {
+            if (i%3==0){
+                count++;
+        sum=count*0.25*areaSingleSheet;
+            }else if (i%3!=0){
+                count1++;
+                sum1=count1*areaSingleSheet;
+
+            }
+
+
+        }
+        double result=sum+sum1;
+        double output= (result/area)*100;
+        System.out.printf("You can cover %.2f%% of the box.",output);
+
+    }
+}
