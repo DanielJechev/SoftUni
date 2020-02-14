@@ -1,0 +1,25 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String[] input=reader.readLine().split(" ");
+        Map<Double,Integer> map=new LinkedHashMap<>();
+        for (String element:input) {
+            Double key=Double.parseDouble(element);
+            if (!map.containsKey(key)){
+                map.put(key,0);
+            }
+map.put(key,map.get(key)+1);
+        }
+        for (Map.Entry<Double,Integer>kvp:map.entrySet()) {
+            System.out.println(String.format("%.1f -> %s",kvp.getKey(),kvp.getValue()));
+        }
+    }
+    
+}

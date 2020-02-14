@@ -1,0 +1,33 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Map<String, List<Double>> grades = new TreeMap<>();
+        int num = Integer.parseInt(reader.readLine());
+        for (int i = 0; i < num; i++) {
+            String name = reader.readLine();
+
+            List<Double> grade = Arrays.stream(reader.readLine().split(" ")).map(Double::parseDouble).collect(Collectors.toList());
+            grades.putIfAbsent(name, new ArrayList<>());
+            grades.get(name).addAll(grade);
+        }
+        grades.forEach((n, g) -> {
+
+            double sum2=0;
+            for (Double gr:g) {
+                sum2+=gr;
+            }
+            double avg=sum2/g.size();
+            
+            System.out.println(String.format("%s is graduated with %s", n, avg));
+        });
+    }
+
+}

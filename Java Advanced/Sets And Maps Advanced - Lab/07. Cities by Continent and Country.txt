@@ -1,0 +1,37 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int input=Integer.parseInt(reader.readLine());
+        Map<String,Map<String,String>> shop=new LinkedHashMap<>();
+        for (int i = 0; i <input ; i++) {
+            String commnand=reader.readLine();
+            String [] tokens=commnand.split(" ");
+            String continent=tokens[0];
+            String country=tokens[1];
+            String city=tokens[2];
+            shop.putIfAbsent(continent,new LinkedHashMap<>());
+            shop.get(continent).putIfAbsent(country,city);
+
+
+        }
+
+        shop.forEach((name,products)->{
+            System.out.println(name+ ":");
+            products.forEach((productName,productPrice)->{
+                System.out.println(String.format("  %s -> %s",productName,productPrice
+                ));
+            });
+        });
+
+
+
+    }
+
+}

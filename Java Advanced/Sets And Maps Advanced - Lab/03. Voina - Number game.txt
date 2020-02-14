@@ -1,0 +1,47 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Set<Integer> first=new LinkedHashSet<>();
+        Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).forEach(first::add);
+        Set<Integer> second=new LinkedHashSet<>();
+         Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).forEach(second::add);
+        for (int rounds = 0; rounds <50 ; rounds++) {
+            if (first.isEmpty()||second.isEmpty()){
+                break;
+            }
+
+            Iterator<Integer> firstPlayerIterator=first.iterator();
+            Iterator<Integer> secondPlayerIterator=second.iterator();
+            int firstValue=firstPlayerIterator.next();
+            first.remove(firstValue);
+            int secondValue=secondPlayerIterator.next();
+                second.remove(secondValue);
+                if (firstValue>secondValue){
+                    first.add(firstValue);
+                    first.add(secondValue);
+                }else if (firstValue<secondValue){
+                    second.add(firstValue);
+                    second.add(secondValue);
+                }else {
+                    first.add(firstValue);
+                    second.add(secondValue);
+                }
+        }
+        if (first.size()>second.size()){
+            System.out.println("First player win!");
+        }else if (first.size()<second.size()){
+            System.out.println("Second player win!");
+        }else {
+            System.out.println("Draw");
+        }
+
+    }
+    
+}

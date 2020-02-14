@@ -1,0 +1,29 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+int input=Integer.parseInt(reader.readLine());
+Map<String,List<Double>> map=new TreeMap<>();
+        for (int i = 0; i <input ; i++) {
+            String line=reader.readLine();
+            String[] tokens=line.split(" ");
+            if (!map.containsKey(tokens[0])){
+                map.put(tokens[0],new ArrayList<>());
+            }
+            map.get(tokens[0]).add(Double.parseDouble(tokens[1]));
+        }
+       map.forEach((name,grades)->{
+           String all=grades.stream().map(g->String.format("%.2f",g)).collect(Collectors.joining(" "));
+           double avg=grades.stream().mapToDouble(e->e).average().orElse(0d);
+           System.out.println(String.format("%s -> %s (avg: %.2f)",name,all,avg));
+       });
+
+    }
+
+}

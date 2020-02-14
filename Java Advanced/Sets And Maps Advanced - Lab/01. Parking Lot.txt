@@ -1,0 +1,36 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        HashSet<String> hash=new HashSet<>();
+        String command=reader.readLine();
+        while (!"END".equals(command)){
+            String [] tokens=command.split(", ");
+            if ("IN".equals(tokens[0])){
+                hash.add(tokens[1]);
+
+            }else {
+                hash.remove(tokens[1]);
+            }
+
+
+
+            command=reader.readLine();
+        }
+
+        for (String output:hash) {
+            System.out.println(output);
+        }
+        if (hash.isEmpty()){
+           System.out.println("Parking Lot is Empty");
+       }
+
+
+
+        }
+        }

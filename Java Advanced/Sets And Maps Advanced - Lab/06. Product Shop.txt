@@ -1,0 +1,34 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+       Map<String,Map<String,Double>> shop=new TreeMap<>();
+String input=reader.readLine();
+while (!"Revision".equals(input)){
+    String[] tokens=input.split(", ");
+    String shopName=tokens[0];
+    String productName=tokens[1];
+Double  productPrice=Double.parseDouble(tokens[2]);
+shop.putIfAbsent(shopName,new LinkedHashMap<>());
+shop.get(shopName).putIfAbsent(productName,productPrice);
+    input=reader.readLine();
+}
+        shop.forEach((name,products)->{
+            System.out.println(name+ "->");
+           products.forEach((productName,productPrice)->{
+                   System.out.println(String.format("Product: %s, Price: %.1f",productName,productPrice
+                   ));
+           });
+           });
+
+
+
+    }
+
+}
