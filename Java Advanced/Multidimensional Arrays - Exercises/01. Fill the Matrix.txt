@@ -1,0 +1,82 @@
+package com.company;
+import javafx.collections.transformation.SortedList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String[] input=reader.readLine().split(", ");
+        int size=Integer.parseInt(input[0]);
+        String pattern=input[1];
+        int [][] array;
+        if (pattern.equals("A")){
+            array=fillPatternA(size);
+            for (int r = 0; r <array.length ; r++) {
+                int []first=array[r];
+                for (int c = 0; c <first.length ; c++) {
+                    System.out.print(first[c]+" ");
+                }
+                System.out.println();
+            }
+        }else {
+            array=fillPatternB(size);
+            for (int r = 0; r <array.length ; r++) {
+                int []first=array[r];
+                for (int c = 0; c <first.length ; c++) {
+                    System.out.print(first[c]+" ");
+                }
+                System.out.println();
+            }
+
+
+
+
+        }
+
+
+
+    }
+
+    private static int[][] fillPatternB(int size) {
+        int [][]array=new int[size][size];
+        int value=1;
+        for (int col = 0; col <size ; col++) {
+            if (col%2==0) {
+                for (int row = 0; row < size; row++) {
+                    array[row][col] = value++;
+                }
+            }else {
+                for (int row = size-1; row >= 0; row--) {
+                    array[row][col]=value++;
+
+                }
+            }
+        }
+
+
+
+
+        return array;
+    }
+
+    private static int[][] fillPatternA(int size) {
+        int [][]array=new int[size][size];
+        int value=1;
+        for (int col = 0; col <size ; col++) {
+                for (int row = 0; row < size; row++) {
+                    array[row][col] = value++;
+                }
+            }
+
+
+
+
+return array;
+    }
+}
+
+
+

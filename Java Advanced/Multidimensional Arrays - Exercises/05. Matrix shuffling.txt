@@ -1,0 +1,75 @@
+package com.company;
+import javafx.collections.transformation.SortedList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int[] input = Arrays.stream(reader.readLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
+
+        String[][] matrix = new String[input[0]][input[1]];
+        for (int r = 0; r <input[0] ; r++) {
+            matrix[r]=reader.readLine().split(" ");
+        }
+String command=reader.readLine();
+        while (!"END".equals(command)){
+            String[] tokens=command.split(" ");
+          if ("swap".equals(tokens[0])&&tokens.length==5){
+          int firstRow=Integer.parseInt(tokens[1]);
+          int firstCol=Integer.parseInt(tokens[2]);
+          int secondRow=Integer.parseInt(tokens[3]);
+          int secondCol=Integer.parseInt(tokens[4]);
+if (firstRow>=0&&firstRow<matrix.length&&firstCol>=0&&firstCol<matrix[firstRow].length
+     &&secondRow>=0&&secondRow<matrix.length&&secondCol>=0&&secondCol<matrix[secondRow].length){
+
+    String temp=matrix[firstRow][firstCol];
+    matrix[firstRow][firstCol]=matrix[secondRow][secondCol];
+    matrix[secondRow][secondCol]=temp;
+    for (int r = 0; r <matrix.length ; r++) {
+        for (int c = 0; c <matrix[r].length ; c++) {
+            System.out.print(matrix[r][c]+ " ");
+        }
+        System.out.println();
+    }
+
+
+}else {
+    System.out.println("Invalid input!");
+
+}
+
+
+          }else {
+              System.out.println("Invalid input!");
+          }
+
+
+
+
+
+            command=reader.readLine();
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+    }
+
+
+
+
+
+
+

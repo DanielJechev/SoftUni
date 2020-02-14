@@ -1,0 +1,45 @@
+package com.company;
+import javafx.collections.transformation.SortedList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        int row=Integer.parseInt(reader.readLine());
+        int[][] matrix=new int[row][row];
+        for (int r = 0; r <row ; r++) {
+            matrix[r]=Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        }
+        int upLeft=0;
+        int downtLeft=0;
+        int sum=0;
+        while (upLeft<matrix.length&&downtLeft<matrix.length){
+            sum= matrix[upLeft][downtLeft]+sum;
+
+
+
+            upLeft++;
+            downtLeft++;
+        }
+
+        upLeft=row-1;
+        downtLeft=0;
+        int result=0;
+        while (upLeft>=0&&downtLeft<matrix.length){
+            result=matrix[upLeft][downtLeft]+result;
+
+upLeft--;
+downtLeft++;
+        }
+int output=Math.abs(sum-result);
+        System.out.println(output);
+
+    }
+}
+
+
+

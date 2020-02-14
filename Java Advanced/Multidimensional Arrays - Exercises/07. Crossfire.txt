@@ -1,0 +1,118 @@
+package com.company;
+import javafx.collections.transformation.SortedList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int [] input=Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int row=input[0];
+        int col=input[1];
+        List<List<Integer>> matrix=new ArrayList<>();
+       int value=1;
+        for (int r = 0; r <row ; r++) {
+            ArrayList<Integer> list=new ArrayList<>();
+            for (int c = 0; c <col ; c++) {
+                list.add(value);
+                value++;
+
+            }
+matrix.add(list);
+        }
+String command=reader.readLine();
+        while (!"Nuke it from orbit".equals(command)){
+            int[] tokens=Arrays.stream(command.split(" ")).mapToInt(Integer::parseInt).toArray();
+            int rows=tokens[0];
+            int cols=tokens[1];
+            int radius=tokens[2];
+            for (int r = rows-radius; r <=rows+radius ; r++) {
+                if (r>=0&&r<matrix.size()&&cols>=0&&cols<matrix.get(r).size()) {
+                    matrix.get(r).set(cols, 0);
+                }
+                }
+                for (int c = cols - radius; c <= cols + radius; c++) {
+                    if (rows>=0&&rows<matrix.size()&&c>=0&&c<matrix.get(rows).size()) {
+                        matrix.get(rows).set(c, 0);
+                    }
+
+            }
+
+
+                 for (int r = 0; r <matrix.size() ; r++) {
+                matrix.set(r,matrix.get(r)
+                .stream()
+                .filter(element -> element !=0)
+                .collect(Collectors.toCollection(ArrayList::new)));
+                if (matrix.get(r).size()==0){
+                    matrix.remove(r);
+                    r--;
+                }
+
+                }
+
+
+
+
+
+
+
+
+            command=reader.readLine();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        for (int r = 0; r <matrix.size() ; r++) {
+            for (int c = 0;  c<matrix.get(r).size() ; c++) {
+
+                System.out.print(matrix.get(r).get(c)+" ");
+
+            }
+            System.out.println();
+        }
+
+
+
+
+    }
+
+  
+
+
+}
+
+
+
+
+
+
