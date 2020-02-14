@@ -1,0 +1,33 @@
+package com.company;
+
+import java.lang.reflect.Array;
+import java.util.ArrayDeque;
+import java.util.Scanner;
+import java.util.Stack;
+import java.text.DecimalFormat;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+    int []tokens=Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    ArrayDeque<Integer> queue=new ArrayDeque<>();
+    Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).limit(tokens[0]).forEach(queue::offer);
+        for (int i = 0; i <tokens[1] ; i++) {
+            queue.poll();
+        }
+if (queue.contains(tokens[2])){
+    System.out.println("true");
+}else {
+    if (queue.size()==0){
+        System.out.println(0);
+    }else {
+        System.out.println(Collections.min(queue));
+    }
+}
+
+
+    }
+}
