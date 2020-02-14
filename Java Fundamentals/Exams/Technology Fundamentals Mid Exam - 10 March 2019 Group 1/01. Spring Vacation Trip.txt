@@ -1,0 +1,61 @@
+package com.company;
+
+
+import java.text.DecimalFormat;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+     int days=Integer.parseInt(scanner.nextLine());
+     double budget=Double.parseDouble(scanner.nextLine());
+        int group=Integer.parseInt(scanner.nextLine());
+        double priceFuel=Double.parseDouble(scanner.nextLine());
+        double foodExpenses=Double.parseDouble(scanner.nextLine());
+        double priceForOneRoom=Double.parseDouble(scanner.nextLine());
+        double moneyForFood=foodExpenses*group*days;
+        double moneyForHotel=priceForOneRoom*group*days;
+        if (group>10){
+            moneyForHotel=moneyForHotel*0.75;
+        }
+        double currentValue= moneyForFood+moneyForHotel;
+        for (int i = 1; i <=days ; i++) {
+            double fuelMoney=Double.parseDouble(scanner.nextLine());
+            currentValue+=fuelMoney*priceFuel;
+            if (i%3==0||i%5==0){
+                currentValue=(0.4*currentValue)+currentValue;
+            }
+            if (i%7==0){
+                currentValue=currentValue - (currentValue/group);
+            }
+            if (currentValue>budget){
+                System.out.printf("Not enough money to continue the trip. You need %.2f$ more.",currentValue-budget);
+                break;
+            }
+
+
+
+
+
+
+
+        }
+        if (currentValue<=budget){
+            System.out.printf("You have reached the destination. You have %.2f$ budget left.",budget-currentValue);
+
+        }
+
+    }
+}
+
+
+
+
+
+
+
+
+
+

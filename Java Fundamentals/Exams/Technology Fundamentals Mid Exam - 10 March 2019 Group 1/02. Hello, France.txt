@@ -1,0 +1,65 @@
+package com.company;
+
+
+import java.text.DecimalFormat;
+import java.util.*;
+
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+ List<String>name=Arrays.stream(scanner.nextLine().split("\\|+")).collect(Collectors.toList());
+ double budget=Double.parseDouble(scanner.nextLine());
+ double money=budget;
+ double pechalba=0;
+ double profit=0;
+        for (String str:name) {
+            String[] tokens=str.split("->");
+            String type=tokens[0];
+            Double products=Double.parseDouble(tokens[1]);
+            if ("Clothes".equals(type)&&products<=50.00||"Shoes".equals(type)&&products<=35.00||"Accessories".equals(type)&&products<=25.50){
+                if (money>=products) {
+                    money=money-products;
+                    pechalba = products * 1.4;
+                    System.out.printf("%.2f ", pechalba);
+                   profit=profit+pechalba;
+
+
+                }
+
+
+            }
+
+
+
+        }
+        profit=profit+money;
+        profit=profit-budget;
+        System.out.println();
+        System.out.printf("Profit: %.2f",profit);
+        System.out.println();
+        double moneyAll= profit+budget;
+        if (moneyAll>=150){
+            System.out.println("Hello, France!");
+        }else {
+            System.out.println("Time to go.");
+        }
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
