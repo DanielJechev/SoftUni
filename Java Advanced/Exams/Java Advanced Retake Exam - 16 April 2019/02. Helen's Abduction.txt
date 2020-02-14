@@ -1,0 +1,107 @@
+package com.company;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+int energy=Integer.parseInt(reader.readLine());
+int rows=Integer.parseInt(reader.readLine());
+char[][] matrix=new char[rows][];
+int parisRow=0;
+int parisCol=0;
+
+        for (int r = 0; r <rows ; r++) {
+            String line=reader.readLine();
+            matrix[r]=line.toCharArray();
+            if (line.contains("P")){
+                parisRow=r;
+                parisCol=line.indexOf("P");
+            
+            }
+
+
+        }
+boolean isAbducted=false;
+        while (energy>0&&!isAbducted){
+            energy--;
+            String[] tokens=reader.readLine().split(" ");
+            String commnad=tokens[0];
+            int row=Integer.parseInt(tokens[1]);
+            int col=Integer.parseInt(tokens[2]);
+            matrix[row][col]='S';
+ if (commnad.equals("up")&& parisRow-1>=0 && parisRow-1<matrix.length && parisCol>=0 && parisCol<matrix[parisRow-1].length){
+     matrix[parisRow][parisCol]='-';
+ parisRow--;
+ if (matrix[parisRow][parisCol]=='S'){
+     energy-=2;
+     }else if (matrix[parisRow][parisCol]=='H'){
+     isAbducted=true;
+ }
+ matrix[parisRow][parisCol]='P';
+ }else if (commnad.equals("down")&& parisRow+1>=0 && parisRow+1<matrix.length && parisCol>=0 && parisCol<matrix[parisRow+1].length){
+     matrix[parisRow][parisCol]='-';
+     parisRow++;
+     if (matrix[parisRow][parisCol]=='S'){
+         energy-=2;
+     }else if (matrix[parisRow][parisCol]=='H'){
+         isAbducted=true;
+     }
+     matrix[parisRow][parisCol]='P';
+ }else if (commnad.equals("left")&& parisRow>=0 && parisRow<matrix.length && parisCol-1>=0 && parisCol-1<matrix[parisRow].length){
+     matrix[parisRow][parisCol]='-';
+     parisCol--;
+     if (matrix[parisRow][parisCol]=='S'){
+         energy-=2;
+     }else if (matrix[parisRow][parisCol]=='H'){
+         isAbducted=true;
+     }
+     matrix[parisRow][parisCol]='P';
+     
+     
+ }else if (commnad.equals("right")&& parisRow>=0 && parisRow<matrix.length && parisCol+1>=0 && parisCol+1<matrix[parisRow].length){
+     matrix[parisRow][parisCol]='-';
+     parisCol++;
+     if (matrix[parisRow][parisCol]=='S'){
+         energy-=2;
+     }else if (matrix[parisRow][parisCol]=='H'){
+         isAbducted=true;
+     }
+     matrix[parisRow][parisCol]='P';
+
+
+ }
+
+
+
+        }
+        if (isAbducted){
+            matrix[parisRow][parisCol]='-';
+            System.out.printf("Paris has successfully abducted Helen! Energy left: %d%n",energy);
+        }else {
+            matrix[parisRow][parisCol]='X';
+            System.out.printf("Paris died at %d;%d.%n",parisRow,parisCol);
+        }
+
+
+
+
+        for (int r = 0; r <matrix.length ; r++) {
+            for (int c = 0; c < matrix[r].length; c++) {
+                System.out.print(matrix[r][c]+ "");
+            }
+            System.out.println();
+        }
+
+    }
+}
+
+
+
+
+
+
+

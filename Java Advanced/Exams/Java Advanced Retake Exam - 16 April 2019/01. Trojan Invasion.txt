@@ -1,0 +1,48 @@
+package com.company;
+import javafx.collections.transformation.SortedList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int troqnci = Integer.parseInt(reader.readLine());
+        ArrayDeque<Integer> queueSpartanci = new ArrayDeque<>();
+        Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).forEach(queueSpartanci::offer);
+        ArrayDeque<Integer> stackTroqnci = new ArrayDeque<>();
+        for (int i = 1; i <=troqnci&&!queueSpartanci.isEmpty(); i++) {
+            Arrays.stream(reader.readLine().split(" ")).mapToInt(Integer::parseInt).forEach(stackTroqnci::push);
+            if (i%3==0) {
+                queueSpartanci.offer(Integer.parseInt(reader.readLine()));
+            }
+        while (!queueSpartanci.isEmpty()&&!stackTroqnci.isEmpty()) {
+            int first = queueSpartanci.poll();
+            int second = stackTroqnci.pop();
+
+            if (first > second) {
+                first-=second;
+                queueSpartanci.addFirst(first);
+
+            } else if (first < second) {
+                second-=first;
+                stackTroqnci.push(second);
+            }
+
+        }
+        }
+
+        if (queueSpartanci.size()>0){
+            System.out.println("The Spartans successfully repulsed the Trojan attack.");
+                System.out.printf("Plates left: %s%n",String.join(",",queueSpartanci.toString()).replaceAll("\\[|\\]",""));
+        }
+
+        if (stackTroqnci.size()>0){
+            System.out.println("The Trojans successfully destroyed the Spartan defense.");
+            System.out.printf("Warriors left: %s%n",String.join(",",stackTroqnci.toString()).replaceAll("\\[|\\]",""));
+        }
+
+
+    }
+}
