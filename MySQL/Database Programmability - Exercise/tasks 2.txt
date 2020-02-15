@@ -1,0 +1,42 @@
+You are given a database schema with tables:
+•	account_holders(id (PK), first_name, last_name, ssn) 
+and 
+•	accounts(id (PK), account_holder_id (FK), balance).
+Write a stored procedure usp_get_holders_full_name that selects the full names of all people. . The result should be sorted by full_name alphabetically and id ascending. 
+
+CREATE PROCEDURE usp_get_holders_full_name()
+	BEGIN
+		SELECT CONCAT_WS(' ', first_name, last_name) AS `full_name`
+        FROM account_holders
+        ORDER BY `full_name`, `id`;
+	END;
+------------------------------------------------------------------------------------------------------------------------------------------
+Your task is to create a stored procedure usp_get_holders_with_balance_higher_than that accepts a number as a parameter and returns
+all people who have more money in total of all their accounts than the supplied number. 
+The result should be sorted by first_name then by last_name alphabetically and account id ascending. 
+
+CREATE PROCEDURE usp_get_holders_with_balance_higher_than(value DOUBLE)
+	BEGIN
+		SELECT first_name, last_name
+        FROM account_holders as ah
+        JOIN accounts as a
+        ON a.account_holder_id = ah.id
+        GROUP BY ah.id
+        HAVING SUM(a.balance) > value
+        ORDER BY a.id;
+        	END;
+------------------------------------------------------------------------------------------------------------------------------------------
+Your task is to create a function ufn_calculate_future_value that accepts as parameters – sum, yearly interest rate and number of years. It should calculate and return the future value of the initial sum. Using the following formula:
+FV=I×(〖(1+R)〗^T)
+	I – Initial sum
+	R – Yearly interest rate
+  T – Number of years
+
+CREATE FUNCTION ufn_calculate_future_value(init_sum DOUBLE, rate DOUBLE, num_of_years INT)
+RETURNS DOUBLE
+
+	BEGIN
+		DECLARE future_value DOUBLE;
+        SET future_value := init_sum * POW(1 + rate, num_of_years);
+        RETURN future_value;
+	END;
