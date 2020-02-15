@@ -1,0 +1,5 @@
+select employees.employee_id, concat(first_name,' ',last_name) as 'full_name',
+departments.department_id,departments.name 
+from employees join departments on
+  employees.employee_id= departments.manager_id
+ ORDER BY employees.employee_id LIMIT 5;

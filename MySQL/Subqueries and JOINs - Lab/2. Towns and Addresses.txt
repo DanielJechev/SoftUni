@@ -1,0 +1,5 @@
+select towns.town_id,towns.name as'town_name',addresses.address_text
+from towns join addresses
+ on towns.town_id=addresses.town_id
+  where towns.name='San Francisco' or towns.name= 'Sofia ' or towns.name='Carnation'
+  order by towns.town_id,addresses.address_id;
