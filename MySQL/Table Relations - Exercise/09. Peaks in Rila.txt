@@ -1,0 +1,6 @@
+SELECT mountains.mountain_range, peaks.peak_name, peaks.elevation 
+FROM mountains
+INNER JOIN  peaks 
+ON peaks.mountain_id = mountains.id
+WHERE mountain_range like 'Rila'
+ORDER BY peaks.elevation DESC;
