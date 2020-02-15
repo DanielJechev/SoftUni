@@ -1,0 +1,156 @@
+Write a query that selects:
+•	employee_id
+•	first_name
+•	project_name
+Filter all the projects of employees with id 24. If the project has started after 2005 inclusively the return value should be NULL. Sort the result by project_name alphabetically.
+
+SELECT e.employee_id, e.first_name, p.name AS `project_name`
+FROM `employees` AS `e`
+JOIN `employees_projects` as `ep`
+ON e.employee_id = ep.employee_id
+LEFT JOIN `projects` AS `p`
+ON ep.project_id = p.project_id AND p.start_date < '2005/01/01'
+WHERE e.employee_id = 24
+ORDER BY `project_name`;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	employee_id
+•	first_name
+•	manager_id
+•	manager_name
+Filter all employees with a manager who has id equal to 3 or 7. Return all rows sorted by employee first_name in ascending order.
+
+SELECT e.employee_id, e.first_name, e.manager_id, ep.first_name AS `manager_name`
+FROM `employees` AS `e`
+JOIN `employees` AS `ep`
+ON e.manager_id = ep.employee_id
+WHERE e.manager_id IN (3,7)
+ORDER BY e.first_name;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	employee_id
+•	employee_name
+•	manager_name
+•	department_name
+Show the first 5 employees (only for employees who have a manager) with their managers and the departments they are in (show the departments of the employees). Order by employee_id.
+
+SELECT e.employee_id, 
+CONCAT_WS(' ', e.first_name, e.last_name) AS `employee_name`, 
+CONCAT_WS(' ', ep.first_name, ep.last_name) AS `manager_name`, 
+d.name AS `department_name`
+FROM `employees` AS `e`
+JOIN `employees` AS `ep`
+ON e.manager_id= ep.employee_id
+AND e.manager_id IS NOT NULL
+JOIN `departments` AS `d`
+ON e.department_id = d.department_id
+ORDER BY e.employee_id
+LIMIT 5;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that returns the value of the lowest average salary of all departments.
+
+SELECT MIN(min_salaries_from_all_departments.average_salary) AS `lowest_average_salary`
+FROM 
+( 
+  SELECT `department_id`, AVG(SALARY) AS `average_salary` 
+  FROM `employees`
+  GROUP BY `department_id`
+) AS `min_salaries_from_all_departments`;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	country_code	
+•	mountain_range
+•	peak_name
+•	elevation
+Filter all peaks in Bulgaria with elevation over 2835. Return all rows sorted by elevation in descending order.
+
+SELECT c.country_code AS `country_code`, m.mountain_range AS `mountain_range`, p.peak_name AS `peak_name`, p.elevation AS `elevation`
+FROM `countries` AS `c`
+JOIN mountains_countries AS `mc`
+ON c.country_code = mc.country_code
+AND c.country_code = 'BG'
+JOIN mountains AS `m`
+ON mc.mountain_id = m.id
+JOIN peaks AS `p`
+ON m.id = p.mountain_id
+AND `elevation` > 2835
+ORDER BY `elevation` DESC;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	country_code
+•	mountain_range
+Filter the count of the mountain ranges in the United States, Russia and Bulgaria.
+Sort result by mountain_range count in decreasing order.
+
+SELECT c.country_code, COUNT(m.mountain_range) AS `mountain_range`
+FROM `countries` as `c`
+JOIN mountains_countries AS `mc`
+ON c.country_code = mc.country_code
+AND c.country_code IN ('BG', 'RU', 'US')
+JOIN mountains as `m`
+ON mc.mountain_id = m.id
+GROUP BY c.country_code
+ORDER BY `mountain_range` DESC;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	country_name
+•	river_name
+Find the first 5 countries with or without rivers in Africa. Sort them by country_name in ascending order.
+
+SELECT c.country_name, r.river_name
+FROM countries AS `c`
+LEFT JOIN countries_rivers AS `cr`
+ON c.country_code = cr.country_code
+LEFT JOIN rivers AS `r`
+ON cr.river_id = r.id	
+WHERE c.continent_code = 'AF'
+ORDER BY c.country_name
+LIMIT 5;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	continent_code
+•	currency_code
+•	currency_usage
+Find all continents and their most used currency.
+Filter any currency that is used in only one country. Sort the result by continent_code and currency_code.
+
+SELECT d1.continent_code, d1.currency_code, d1.currency_usage FROM
+    (SELECT `c`.`continent_code`, `c`.`currency_code`,
+    COUNT(`c`.`currency_code`) AS `currency_usage` FROM countries as c
+    GROUP BY c.currency_code, c.continent_code HAVING currency_usage > 1) as d1
+LEFT JOIN
+    (SELECT `c`.`continent_code`,`c`.`currency_code`,
+    COUNT(`c`.`currency_code`) AS `currency_usage` FROM countries as c
+     GROUP BY c.currency_code, c.continent_code HAVING currency_usage > 1) as d2
+ON d1.continent_code = d2.continent_code AND d2.currency_usage > d1.currency_usage
+ 
+WHERE d2.currency_usage IS NULL
+ORDER BY d1.continent_code, d1.currency_code;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Find the count of all countries which don’t have a mountain.
+
+SELECT COUNT(c.country_code) AS country_count 
+FROM countries as c
+LEFT JOIN mountains_countries AS m_c 
+ON c.country_code = m_c.country_code
+WHERE m_c.mountain_id IS NULL;
+-------------------------------------------------------------------------------------------------------------------------------------------
+For each country, find the elevation of the highest peak and the length of the longest river,
+sorted by the highest peak_elevation (from highest to lowest),
+then by the longest river_length (from longest to smallest), then by country_name (alphabetically).
+Display NULL when no data is available in some of the columns. Limit only the first 5 rows.
+
+SELECT c.country_name, MAX(p.elevation) AS `highest_peak_elevation`, MAX(r.length) AS `longest_river_length`
+FROM countries AS `c`
+LEFT JOIN mountains_countries AS `m_c`
+ON c.country_code = m_c.country_code
+LEFT JOIN peaks AS `p`
+ON m_c.mountain_id = p.mountain_id
+LEFT JOIN countries_rivers AS `c_r`
+ON c.country_code = c_r.country_code
+LEFT JOIN rivers AS `r`
+ON c_r.river_id = r.id
+GROUP BY c.country_name
+ORDER BY highest_peak_elevation DESC, longest_river_length DESC, c.country_name
+LIMIT 5;
+-------------------------------------------------------------------------------------------------------------------------------------------

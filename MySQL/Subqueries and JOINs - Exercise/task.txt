@@ -1,0 +1,101 @@
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	employee_id
+•	job_title
+•	address_id
+•	address_text
+Return the first 5 rows sorted by address_id in ascending order.
+
+SELECT e.employee_id, e.job_title, e.address_id, a.address_text
+FROM `employees` AS `e`
+JOIN `addresses` as `a`
+ON e.address_id = a.address_id
+ORDER BY a.address_id
+LIMIT 5;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	first_name
+•	last_name
+•	town
+•	address_text
+Sort the result by first_name in ascending order then by last_name. Select first 5 employees.
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	employee_id
+•	first_name
+•	last_name
+•	department_name
+Sort the result by employee_id in descending order. Select only employees from the “Sales” department.
+
+SELECT e.employee_id, e.first_name, e.last_name, d.name AS `department_name`
+FROM `employees` AS `e`
+JOIN `departments` as `d`
+ON e.department_id = d.department_id
+WHERE d.name = "Sales"
+ORDER BY e.employee_id DESC
+LIMIT 5;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	employee_id
+•	first_name
+•	salary
+•	department_name
+Filter only employees with salary higher than 15000. Return the first 5 rows sorted by department_id in descending order.
+
+SELECT e.employee_id, e.first_name, e.salary, d.name AS `department_name`
+FROM `employees` AS `e`
+JOIN `departments` as `d`
+ON e.department_id = d.department_id
+WHERE e.salary > 15000
+ORDER BY e.department_id DESC
+LIMIT 5;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	employee_id
+•	first_name
+Filter only employees without a project. Return the first 3 rows sorted by employee_id in descending order.
+
+SELECT e.employee_id, e.first_name
+FROM `employees` AS `e`
+WHERE NOT EXISTS
+  (
+  SELECT NULL
+  FROM `employees_projects` AS `ep`
+  WHERE ep.employee_id = e.employee_id
+  )
+ORDER BY e.employee_id DESC
+LIMIT 3;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	first_name
+•	last_name
+•	hire_date
+•	dept_name
+Filter only employees hired after 1/1/1999 and from either the "Sales" or the "Finance" departments.
+Sort the result by hire_date (ascending).
+
+SELECT e.first_name, e.last_name, e.hire_date, d.name AS `dept_name`
+FROM `employees` AS `e`
+LEFT JOIN `departments` as `d`
+ON d.department_id = e.department_id
+WHERE date(e.hire_date) > '1999/1/1' AND d.name IN ('Sales', 'Finance')
+ORDER BY e.hire_date ASC;
+-------------------------------------------------------------------------------------------------------------------------------------------
+Write a query that selects:
+•	employee_id
+•	first_name
+•	project_name
+Filter only employees with a project, which has started after 13.08.2002 and it is still ongoing (no end date). Return the first 5 rows sorted by first_name then by project_name both  in ascending order.
+
+SELECT e.employee_id, e.first_name, p.name AS `project_name`
+FROM `employees` AS `e`
+JOIN `employees_projects` as `ep`
+ON e.employee_id = ep.employee_id
+LEFT JOIN `projects` AS `p`
+ON ep.project_id = p.project_id
+WHERE date(p.start_date) > '2002/08/13' AND p.end_date IS NULL
+ORDER BY e.first_name, `project_name`
+LIMIT 5;
