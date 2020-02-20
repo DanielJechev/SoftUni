@@ -1,0 +1,64 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+public class Main1 {
+    private static final String CONNECTION_DATA="jdbc:mysql://localhost:3306/minions_db";
+    private static Connection connection;
+   private static  PreparedStatement statement;
+    public static void main(String[] args) throws SQLException, IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Properties properties = new Properties();
+        properties.setProperty("user", "root");
+        properties.setProperty("password", "Mnbvcxz12");
+        connection = DriverManager.getConnection(CONNECTION_DATA, properties);
+        int villainID = Integer.parseInt(reader.readLine());
+        findVillainAndDeleteIt(villainID);
+    }
+
+    private static void findVillainAndDeleteIt(int villainID) {
+        String sqlQuery = "SELECT * FROM `villains` WHERE `id` = ?";
+        try(PreparedStatement stmt = connection.prepareStatement(sqlQuery)) {
+            stmt.setInt(1, villainID);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.first()) {
+                String villainName = rs.getString("name");
+                releasedMinions( villainID, villainName);
+            } else {
+                System.out.println("No such villain was found");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void releasedMinions(int villainID, String villainName) {
+        String sqlDeleteQuery = "DELETE FROM `minions_villains` WHERE `villain_id` = ?";
+        try(PreparedStatement stmt = connection.prepareStatement(sqlDeleteQuery)) {
+            stmt.setInt(1, villainID);
+            int affectedRows = stmt.executeUpdate();
+            deleteVillain( villainID, villainName, affectedRows);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void deleteVillain(int villainID, String villainName, int affectedRows) {
+        String sqlDeleteQuery = "DELETE FROM `villains` WHERE `id` = ?";
+        try(PreparedStatement stmt = connection.prepareStatement(sqlDeleteQuery)) {
+            stmt.setInt(1, villainID);
+            stmt.executeUpdate();
+            System.out.println(String.format("%s was deleted", villainName));
+            System.out.println(String.format("%d minions released", affectedRows));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+}
+
