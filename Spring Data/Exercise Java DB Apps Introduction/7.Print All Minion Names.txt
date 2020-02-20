@@ -1,0 +1,52 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+public class Main1 {
+    private static final String CONNECTION_DATA="jdbc:mysql://localhost:3306/minions_db";
+    private static Connection connection;
+   private static  PreparedStatement statement;
+    public static void main(String[] args) throws SQLException, IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Properties properties = new Properties();
+        properties.setProperty("user", "root");
+        properties.setProperty("password", "Mnbvcxz12");
+        connection = DriverManager.getConnection(CONNECTION_DATA, properties);
+      print();
+    }
+
+    private static void print() {
+        List<String> minionsList = new ArrayList<>();
+
+        String sqlQuery = "SELECT * FROM `minions`;";
+        try(Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+
+            rs.beforeFirst();
+            while (rs.next()) {
+                minionsList.add(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        printResult(minionsList);
+    }
+
+    private static void printResult(List<String> minionsList) {
+        int counter = 0;
+        for (int i = 0; i < minionsList.size() / 2; i++) {
+            System.out.println(minionsList.get(i));
+            System.out.println(minionsList.get((minionsList.size() - 1) - i));
+            counter += 2;
+        }
+        if (minionsList.size() > counter) {
+            int index = minionsList.size() / 2;
+            System.out.println(minionsList.get(index));
+        }
+    }
+    }
+
+

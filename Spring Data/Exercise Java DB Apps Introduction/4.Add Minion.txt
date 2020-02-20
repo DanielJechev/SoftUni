@@ -1,0 +1,94 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.*;
+import java.util.Properties;
+public class Main1 {
+    private static final String CONNECTION_DATA="jdbc:mysql://localhost:3306/minions_db";
+    private static Connection connection;
+   private static  PreparedStatement statement;
+    public static void main(String[] args) throws SQLException, IOException {
+        BufferedReader reader=new BufferedReader( new InputStreamReader(System.in));
+Properties properties=new Properties();
+properties.setProperty("user","root");
+properties.setProperty("password","Mnbvcxz12");
+connection=DriverManager.getConnection(CONNECTION_DATA,properties);
+        System.out.println("Minion:");
+String[] minionParameters=reader.readLine().split(" ");
+String minionName=minionParameters[0];
+int minionAge=Integer.parseInt(minionParameters[1]);
+String minionTown=minionParameters[2];
+        System.out.println("Villain:");
+String villain=reader.readLine();
+
+if (!ifExistTown(minionTown,"towns")){
+    insertTown(minionTown);
+    System.out.printf("Town %s was added to the database.%n",minionTown);
+}
+
+if (!ifExistVillain(villain,"villains")){
+    insertVillain(villain);
+    System.out.printf("Villain %s was added to the database.%n",villain);
+}
+
+if (!ifExistMinion(minionName,"minions")){
+    insertMinion(minionName);
+    System.out.printf("Successfully added %s to be minion of %s",minionName,villain);
+}
+
+
+
+
+    }
+
+    private static void insertMinion(String minionName) throws SQLException {
+   String query="insert into minions(name,age,town_id) value(?,?,?)";
+   statement=connection.prepareStatement(query);
+   statement.setString(1,minionName);
+   statement.setString(2,"1");
+   statement.setString(3,"1");
+   statement.execute();
+    }
+
+    private static boolean ifExistMinion(String minionName, String minions) throws SQLException {
+    String query="select name from minions where name=?";
+    statement=connection.prepareStatement(query);
+    statement.setString(1,minionName);
+    ResultSet resultSet=statement.executeQuery();
+    return resultSet.next();
+    }
+
+    private static void insertVillain(String villain) throws SQLException {
+    String query="insert into villains (name,evilness_factor) value(?,?)";
+    statement=connection.prepareStatement(query);
+    statement.setString(1,villain);
+    statement.setString(2,"evil");
+    statement.execute();
+    }
+
+    private static boolean ifExistVillain(String villain, String villains) throws SQLException {
+        String query="select name from villains where name=?";
+        statement=connection.prepareStatement(query);
+        statement.setString(1,villain);
+        ResultSet resultSet=statement.executeQuery();
+        return resultSet.next();
+    }
+
+    private static void insertTown(String minionTown) throws SQLException {
+        String query= "insert into towns (name,country) value(?,?)";
+        statement=connection.prepareStatement(query);
+        statement.setString(1,minionTown);
+        statement.setString(2,"null");
+        statement.execute();
+
+    }
+
+    private static boolean ifExistTown(String minionTown, String towns) throws SQLException {
+        String query="select name from towns where name=?";
+        statement=connection.prepareStatement(query);
+        statement.setString(1,minionTown);
+        ResultSet resultSet=statement.executeQuery();
+        return resultSet.next();
+    }
+}
+
