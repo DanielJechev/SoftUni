@@ -1,0 +1,16 @@
+private void employeesMaximumSalaries()  {
+         BigDecimal start = new BigDecimal(30000);
+       BigDecimal end = new BigDecimal(70000);
+        List<Object[]> columns = entityManager
+                .createQuery("SELECT d.name, MAX(e.salary) AS max FROM Department d JOIN d.employees e GROUP BY d.id HAVING MAX(e.salary) NOT BETWEEN :start AND :end")
+                .setParameter("start",start)
+                .setParameter("end",end)
+                .getResultList();
+
+        for (Object[] column : columns) {
+            String departmentName = (String) column[0];
+            BigDecimal departmentMaxSalary = (BigDecimal) column[1];
+            System.out.printf("%s %.2f%n", departmentName,
+                    departmentMaxSalary.floatValue());
+        }
+    }

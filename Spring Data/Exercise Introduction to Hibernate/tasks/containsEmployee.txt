@@ -1,0 +1,10 @@
+private void containsEmployee() throws IOException {
+        try {
+            String fullName = this.reader.readLine();
+            Employee employee = this.entityManager.createQuery("select e from Employee  as e where  concat(e.firstName,' ',e.lastName)=:name", Employee.class)
+                    .setParameter("name", fullName).getSingleResult();
+            System.out.println("Yes");
+        }catch (NoResultException nre){
+            System.out.println("No");
+        }
+    }

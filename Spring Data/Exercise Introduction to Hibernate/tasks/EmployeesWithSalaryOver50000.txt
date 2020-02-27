@@ -1,0 +1,6 @@
+private void EmployeesWithSalaryOver50000() {
+        List<Employee> employees=this.entityManager.createQuery("select e from Employee  as e where e.salary>50000",Employee.class).getResultList();
+        for (Employee employee:employees) {
+            System.out.println(employee.getFirstName());
+        }
+    }

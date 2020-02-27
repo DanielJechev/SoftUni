@@ -1,0 +1,19 @@
+ private void addingNewAddressAndUpdatingEmployee() throws IOException {
+        String input =reader.readLine();
+        Employee employee=entityManager.createQuery("select  e from Employee e where e.lastName=:name",Employee.class).setParameter("name",input).getSingleResult();
+        Address address= createAddress("Vithoshka 15");
+        entityManager.getTransaction().begin();
+        entityManager.detach(employee);
+        employee.setAddress(address);
+        entityManager.flush();
+        entityManager.getTransaction().commit();
+    }
+
+private Address createAddress(String text) {
+        Address address=new Address();
+        address.setText(text);
+        entityManager.getTransaction().begin();
+        entityManager.persist(address);
+        entityManager.getTransaction().commit();
+        return address;
+    }

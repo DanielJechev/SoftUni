@@ -1,0 +1,21 @@
+private void increaseSalaries() {
+          List<Employee> employees=entityManager.createQuery("select e from  Employee as e   where e.department.name='Engineering' or e.department.name= 'Tool Design' or e.department.name='Marketing' or e.department.name='Information Services'  ",Employee.class)
+                  .getResultList();
+        entityManager.getTransaction().begin();
+
+        employees.forEach(entityManager::detach);
+
+        employees.forEach(e -> e.setSalary(e.getSalary()
+                .multiply(new BigDecimal(1.12))));
+
+        employees.forEach(entityManager::merge);
+
+        entityManager.getTransaction().commit();
+        for (Employee employee : employees) {
+            System.out.printf("%s %s ($%.2f)%n",
+                    employee.getFirstName(),
+                    employee.getLastName(),
+                    employee.getSalary().floatValue());
+        }
+
+    }

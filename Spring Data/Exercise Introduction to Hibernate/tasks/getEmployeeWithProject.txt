@@ -1,0 +1,11 @@
+private void getEmployeeWithProject() throws IOException {
+        int id=Integer.parseInt(reader.readLine());
+        Employee employee = entityManager.find(Employee.class, id);
+        List<Project> projects=entityManager.createQuery("SELECT p from Employee  as e join e.projects p where e.id=: id order by p.name asc ", Project.class)
+       .setParameter("id",employee.getId()).getResultList();
+        System.out.println(employee.getFirstName()+" "+employee.getLastName()+"-");
+        for (Project project:projects) {
+            System.out.printf("%s%n",project.getName());
+        }
+
+        }

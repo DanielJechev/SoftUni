@@ -1,0 +1,13 @@
+private void findLatest10Projects() {
+        List<Project> projects=entityManager.createQuery("SELECT p FROM Project p ORDER BY p.name ASC, p.startDate DESC ").setMaxResults(10).getResultList();
+        for (Project project : projects) {
+            System.out.printf("Project name: %s%n",project.getName());
+            System.out.printf("    Project Description: %s%n",project.getDescription());
+            System.out.printf("    Project Start Date: %s%n",project.getStartDate().toString());
+            if(project.getEndDate() != null) {
+                System.out.printf("    Project End Date: %s%n", project.getEndDate().toString());
+            } else {
+                System.out.println("    Project End Date: null");
+            }
+        }
+    }

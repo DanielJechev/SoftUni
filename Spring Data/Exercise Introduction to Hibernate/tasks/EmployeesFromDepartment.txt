@@ -1,0 +1,8 @@
+private void EmployeesFromDepartment() {
+        List<Employee> employees=this.entityManager.createQuery("select e  from Employee as e" +
+                " where e.department.name ='Research and Development' order by e.salary asc,e.id asc",Employee.class).getResultList();
+        for (Employee employee:employees) {
+            System.out.printf("%s %s from Research and Development - $%.2f%n",
+                    employee.getFirstName(),employee.getLastName(),employee.getSalary());
+        }
+    }

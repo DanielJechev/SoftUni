@@ -1,0 +1,50 @@
+ private void removeTowns() throws IOException {
+        String townName = reader.readLine();
+
+        try {
+            Town town = getTownByName(townName);
+
+            long count = getCountOfDeletedAddresses(town);
+
+            removeAddressesByTown(town);
+
+            entityManager.remove(town);
+
+            printCountOfDeletedAddresses(count, townName);
+        } catch (NoResultException e) {
+            System.err.println("Town doesn't exists!");
+        }
+    }
+
+private long getCountOfDeletedAddresses(Town town) {
+        return entityManager.
+                createQuery("SELECT COUNT(a.id) FROM Address a WHERE a.town.id =: id", Long.class)
+                .setParameter("id", town.getId())
+                .getSingleResult();
+    }
+
+ private void printCountOfDeletedAddresses(long count, String townName) {
+        String word = "addresses";
+        if (count == 1) {
+            word = "address";
+        }
+        System.out.printf("%d %s in %s deleted%n",
+                (int) count, word, townName);
+    }
+
+private Town getTownByName(String townName) {
+        return entityManager
+                .createQuery("SELECT t FROM Town t WHERE t.name = : name", Town.class)
+                .setParameter("name", townName)
+                .getSingleResult();
+    }
+
+ private void removeAddressesByTown(Town town) {
+        List<Address> addresses = entityManager
+                .createQuery("SELECT a FROM Address a WHERE a.town.id =: id", Address.class)
+                .setParameter("id", town.getId())
+                .getResultList();
+
+        addresses.forEach(entityManager::remove);
+    }
+

@@ -1,0 +1,9 @@
+private void addressesWithEmployeeCount() {
+         entityManager.createQuery("SELECT а FROM Address AS а ORDER BY а.employees.size DESC ",
+                        Address.class)
+                .setMaxResults(10)
+                .getResultList()
+                .forEach(a -> System.out.printf("%s, %s - %d employees%n",
+                        a.getText(), a.getTown().getName(), a.getEmployees().size()));
+
+    }

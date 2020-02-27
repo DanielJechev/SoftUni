@@ -1,0 +1,9 @@
+ private void findEmployeesByFirstName() throws IOException {
+        String input=reader.readLine();
+        List<Employee> employees=entityManager.createQuery("select e from Employee as e where e.firstName like : name",Employee.class)
+                .setParameter("name",input+"%").getResultList();
+        for (Employee employee:employees) {
+            System.out.printf("%s %s - %s -($%.2f)%n"
+            ,employee.getFirstName(),employee.getLastName(),employee.getJobTitle(),employee.getSalary());
+        }
+    }
