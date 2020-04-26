@@ -1,0 +1,8 @@
+select  max(sk.speed) as m_a  ,t.name from players as p 
+  join
+skills_data as sk on p.skills_data_id=sk.id  
+right join teams on p.team_id=teams.id 
+join stadiums as s on teams.stadium_id=s.id 
+join towns as t on s.town_id=t.id
+ where teams.name !='Devify' group by t.name
+order by m_a desc,t.name;

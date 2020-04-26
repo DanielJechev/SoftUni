@@ -1,0 +1,69 @@
+create table countries(
+id int primary key auto_increment,
+`name` varchar(45)  not null
+);
+
+create table towns(
+id int primary key auto_increment,
+`name` varchar(45)  not null,
+`country_id` INT not null,
+CONSTRAINT fk_towns_countries
+FOREIGN KEY (country_id) REFERENCES countries(id)
+);
+create table stadiums(
+id int primary key auto_increment,
+`name` varchar(45)  not null,
+capacity int not null,
+town_id int not null,
+CONSTRAINT fk_stadiums_towns
+FOREIGN KEY (town_id) REFERENCES towns(id)
+);
+create table teams(
+id int primary key auto_increment,
+`name` varchar(45)  not null,
+established date  not null,
+fan_base bigint default 0 not null,
+stadium_id int not null,
+CONSTRAINT fk_teams_stadiums
+FOREIGN KEY (stadium_id) REFERENCES stadiums(id)
+);
+create table skills_data (
+id int primary key auto_increment,
+dribbling int default 0,
+pace  int default 0,
+passing int default 0,
+shooting int default 0,
+speed int default 0,
+strength int default 0
+);
+create table coaches(
+id int primary key auto_increment,
+first_name varchar(10) not null,
+last_name varchar(20) not null,
+salary decimal(10,2) default 0 not null,
+coach_level int default 0 not null
+);
+create table players(
+id int primary key auto_increment,
+first_name varchar(10) not null,
+last_name varchar(20) not null,
+age int default 0 not null,
+position char(1) not null,
+salary  decimal(10,2)  default 0 not null,
+hire_date datetime,
+skills_data_id int not null,
+CONSTRAINT fk_players_skills_data	
+FOREIGN KEY (skills_data_id) REFERENCES skills_data(id),
+team_id int ,
+CONSTRAINT fk_players_teams
+FOREIGN KEY (team_id) REFERENCES teams(id)
+);
+create table players_coaches(
+player_id int,
+coach_id int,
+ PRIMARY KEY (player_id, coach_id),
+CONSTRAINT fk_players_coaches_players
+FOREIGN KEY (player_id) REFERENCES players(id),
+CONSTRAINT fk_players_coaches_coaches
+FOREIGN KEY (coach_id) REFERENCES coaches(id)
+);

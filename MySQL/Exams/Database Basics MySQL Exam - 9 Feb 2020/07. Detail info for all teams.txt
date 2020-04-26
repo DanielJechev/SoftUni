@@ -1,0 +1,4 @@
+select t.name as team_name,t.established,t.fan_base, count(p.id) as players_count from teams as t
+left join players as p on
+t.id=p.team_id  group by t.id
+order by count(p.id) desc,t.fan_base desc;

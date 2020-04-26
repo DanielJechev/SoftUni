@@ -1,0 +1,8 @@
+select c.name  ,count(p.id) as igrachi ,sum(p.salary) from 
+players as p
+ join teams as t on p.team_id=t.id
+join stadiums as s on t.stadium_id=s.id 
+join towns on s.town_id=towns.id
+ right join countries as c on towns.country_id=c.id
+group by c.id 
+order by igrachi desc,c.name;

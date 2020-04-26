@@ -1,0 +1,9 @@
+create procedure udp_find_playmaker(min_dribble_points int , team_name VARCHAR(45))
+begin
+select concat(p.first_name,' ',p.last_name) as full_name ,p.age,p.salary,sd.dribbling,sd.speed,t.name 
+ from players as p  join teams as t on p.team_id=t.id
+ join skills_data as sd on p.skills_data_id=sd.id
+ where t.name=team_name
+ having  sd.dribbling>min_dribble_points 
+ order by speed desc  limit 1;
+end;

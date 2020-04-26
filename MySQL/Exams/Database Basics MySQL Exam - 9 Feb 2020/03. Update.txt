@@ -1,0 +1,7 @@
+SET SQL_SAFE_UPDATES = 0;
+update coaches
+set coach_level=coach_level+1
+where first_name like 'A%'
+ and  id in (select  coach_id from players_coaches);
+ 
+ 

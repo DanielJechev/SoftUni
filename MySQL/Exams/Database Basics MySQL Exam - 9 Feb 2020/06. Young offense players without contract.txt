@@ -1,0 +1,5 @@
+select p.id, concat(p.first_name,' ',p.last_name) full_name ,p.age
+,p.position , p.hire_date from players as p join skills_data
+ as sk on p.skills_data_id=sk.id
+where strength>50 and age<23 and position='A' and hire_date is null
+order by salary asc,age;
