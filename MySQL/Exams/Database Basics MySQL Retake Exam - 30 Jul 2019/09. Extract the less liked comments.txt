@@ -1,0 +1,4 @@
+SELECT CONCAT(LEFT(comment, 20), '...') AS summary FROM comments AS c
+left JOIN likes AS l ON l.comment_id = c.id
+WHERE l.comment_id IS NULL
+ORDER BY c.id DESC

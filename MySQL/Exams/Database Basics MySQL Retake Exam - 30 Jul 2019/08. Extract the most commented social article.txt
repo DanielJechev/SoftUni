@@ -1,0 +1,6 @@
+select a.title , count(c.id) as comme from articles as a join comments as c on
+a.id=c.article_id 
+WHERE a.id = 32
+group by a.title
+ORDER BY comme DESC
+LIMIT 1;

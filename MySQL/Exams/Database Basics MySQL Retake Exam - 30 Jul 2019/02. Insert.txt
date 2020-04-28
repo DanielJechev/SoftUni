@@ -1,0 +1,4 @@
+insert into likes(article_id,comment_id,user_id)
+select(select length(username) where id%2=0) as article_id,
+(select length(email) where id%2=1) as comment_id,
+id from users where id between 16 and 20;

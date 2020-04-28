@@ -1,0 +1,2 @@
+SELECT ua.article_id,a.title from users_articles as ua join articles as a on ua.article_id=a.id
+ where user_id=article_id order by article_id;

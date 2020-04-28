@@ -1,0 +1,14 @@
+create function udf_users_articles_count(username VARCHAR(30)) 
+returns int 
+begin
+declare result int;
+set result:=( select count(a.id)
+FROM articles AS a
+JOIN users_articles ua
+ON a.id = ua.article_id
+JOIN users u
+ON ua.user_id = u.id
+WHERE u.username = username
+GROUP BY u.id);
+return result;
+end;

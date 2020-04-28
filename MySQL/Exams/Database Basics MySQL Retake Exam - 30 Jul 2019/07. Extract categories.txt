@@ -1,0 +1,6 @@
+select c.category, count( distinct a.title) as articles , count(l.id) as likes from categories as c
+ left join articles as a on c.id=a.category_id
+left join likes as l on l.article_id=a.id
+ group by c.category
+ ORDER BY likes DESC, articles DESC, c.id ASC;
+ 

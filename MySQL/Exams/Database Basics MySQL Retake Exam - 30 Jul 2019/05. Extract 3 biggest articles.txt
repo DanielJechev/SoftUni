@@ -1,0 +1,2 @@
+select title, concat(left(content, 20), '...') from articles  where id=16 or id=23 or id=27 
+order by id; 
