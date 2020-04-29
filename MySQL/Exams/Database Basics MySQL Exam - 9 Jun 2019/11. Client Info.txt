@@ -1,0 +1,6 @@
+create  procedure udp_clientinfo(name VARCHAR(50)) 
+begin
+select c.full_name,c.age,ba.account_number,concat('$',ba.balance)
+from clients as c join bank_accounts as ba on c.id=ba.client_id
+where c.full_name=name limit 1;
+end

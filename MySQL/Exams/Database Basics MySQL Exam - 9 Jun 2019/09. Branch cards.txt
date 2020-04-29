@@ -1,0 +1,8 @@
+select b.name ,count(c.card_number) from branches as b 
+left join employees as e on b.id=e.branch_id
+  left join employees_clients as ec on e.id=ec.employee_id
+left join bank_accounts as ba on ec.client_id=ba.client_id
+  left join cards as c on c.bank_account_id=ba.id
+group by b.name
+order by count( c.id) desc,  b.name;
+

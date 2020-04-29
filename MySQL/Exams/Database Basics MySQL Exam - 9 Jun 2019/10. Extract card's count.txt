@@ -1,0 +1,10 @@
+create  function udf_client_cards_count(name VARCHAR(30)) 
+returns int
+begin
+declare asd int;
+set asd:=(select count(c.id) from cards as c join
+bank_accounts as ba on c.bank_account_id=ba.id
+join clients as cl on cl.id=ba.client_id  where cl.full_name=name
+group by cl.full_name limit 1);
+return asd;
+end

@@ -1,0 +1,44 @@
+create table branches(
+id int primary key auto_increment,
+name varchar(30) not null unique
+);
+
+create table employees(
+id int primary key auto_increment,
+first_name varchar(20) not null,
+last_name varchar(20) not null,
+salary decimal(10,2) not null,
+started_on date not null,
+branch_id int  not null,
+CONSTRAINT fk_employees_branches
+FOREIGN KEY (branch_id) REFERENCES branches(id)
+);
+create table clients(
+id int primary key auto_increment,
+full_name varchar(50) not null,
+age int not null
+);
+create table employees_clients(
+employee_id int,
+client_id int,
+CONSTRAINT fk_employees_clients_employees
+FOREIGN KEY (employee_id) REFERENCES employees(id),
+CONSTRAINT fk_employees_clients_clients
+FOREIGN KEY (client_id) REFERENCES clients(id)
+);
+create  table bank_accounts(
+id int primary key auto_increment,
+account_number varchar(10) not null,
+balance decimal(10,2) not null,
+client_id int  not null unique,
+CONSTRAINT fk_bank_accounts_clients
+FOREIGN KEY (client_id) REFERENCES clients(id)
+);
+create table cards(
+id int primary key auto_increment,
+card_number varchar(19) not null,
+card_status varchar(7) not null,
+bank_account_id int not null,
+CONSTRAINT fk_cards_bank_accounts
+FOREIGN KEY (bank_account_id) REFERENCES bank_accounts(id)
+);
