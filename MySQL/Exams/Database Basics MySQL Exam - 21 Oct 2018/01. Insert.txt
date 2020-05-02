@@ -1,0 +1,15 @@
+insert into travel_cards(card_number,job_during_journey,colonist_id,journey_id)
+select( case
+when birth_date >'1980-01-01'
+then concat(left(birth_date,4),day(birth_date),left(ucn,4))
+else concat(year(birth_date),month(birth_date) , right(ucn,4))
+end)
+,(case
+when id%2 =0
+then 'Pilot'
+when id%3=0
+then'Cook'
+else 'Engineer'
+end),id
+,left(ucn,1) 
+ from colonists where id between 96 and 100;

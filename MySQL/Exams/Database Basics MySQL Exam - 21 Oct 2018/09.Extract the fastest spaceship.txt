@@ -1,0 +1,4 @@
+select  spaceships.name ,spaceports.name  from spaceships
+ join journeys as j on j.spaceship_id=spaceships.id
+ join spaceports on j.destination_spaceport_id=spaceports.id
+group by spaceships.name order by max(light_speed_rate) desc limit 1 ;

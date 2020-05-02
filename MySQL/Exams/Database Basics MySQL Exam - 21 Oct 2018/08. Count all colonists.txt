@@ -1,0 +1,4 @@
+select count(c.id) from colonists  as c
+join travel_cards as tc on c.id=tc.colonist_id
+join journeys as j on j.id=tc.journey_id
+where j.purpose='Technical';
