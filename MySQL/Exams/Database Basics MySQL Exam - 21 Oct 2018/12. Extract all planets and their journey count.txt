@@ -1,0 +1,5 @@
+select p.name,count(j.id) as c from planets as p
+join spaceports as s on p.id=s.planet_id
+join journeys as j on j.destination_spaceport_id=s.id
+group by p.name
+order by c desc ,p.name;
