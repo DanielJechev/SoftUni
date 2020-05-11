@@ -1,0 +1,12 @@
+CREATE procedure udp_modify_spaceship_light_speed_rate(spaceship_name VARCHAR(50), light_speed_rate_increse INT(11)) 
+begin
+start transaction;
+IF SPACESHIP_NAME IN(SELECT NAME from spaceships) 
+then 
+ update spaceships 
+  set light_speed_rate= light_speed_rate+light_speed_rate_increse;
+else signal sqlstate '45000'
+ set message_text = 'Spaceship you are trying to modify does not exists.';
+end if;
+commit;
+END

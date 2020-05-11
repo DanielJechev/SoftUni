@@ -1,0 +1,4 @@
+select  j.id ,p.name,spaceports.name,j.purpose
+from journeys as j join spaceports on spaceports.id=j.destination_spaceport_id
+join planets as p on spaceports.planet_id=p.id
+where j.id=3;
